@@ -5,10 +5,13 @@ import FirebaseContext from './context/firebase'
 import { useContext, useState } from 'react'
 
 function App() {
+
+  //
+  const initialOption = '--Select your site'
+
   const { firebase } = useContext(FirebaseContext)
-  // const dataFromFirebase = firebase.firestore().collection('sites')
   const [docs, setDocs] = useState([])
-  const [optionValue, setOptionValue] = useState([])
+  const [optionValue, setOptionValue] = useState(initialOption)
 
   const data = firebase.firestore().collection('sites').get()
     .then((snapshot) => {
@@ -19,23 +22,33 @@ function App() {
       setDocs(documents)
     })
 
+  function handleChange(e) {
+    setOptionValue(e.target.value)
+
+  }
 
   return (
-    <div className="App">
-      <h1>This is a timesheet.</h1>
-      <form>
-        <b> Please select your site </b>
-        <select id="sitename" >
-          <option>--Select your site</option>
-          <option></option>
-          {docs && docs.map((doc) => {
-            return <option>{doc.sitename}</option>
+    <>
+      <div className="App">
+        <h1>This is a timesheet.</h1>
+        <form>
+          <b> Please select your site </b>
+          <select id="sitename"
+            onChange={handleChange}
+            value={optionValue}
+          >
+            <option>{initialOption}</option>
+            <option></option>
+            {docs && docs.map((doc) => {
+              return <option>{doc.sitename}</option>
+            })}
+          </select>
+        </form>
 
-          })}
-        </select>
-      </form>
+        {optionValue}
 
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import FirebaseContext from '../context/firebase'
 import { useContext, useState } from 'react'
 
@@ -10,20 +10,26 @@ export default function Shifts() {
     const [docs, setDocs] = useState([])
     const [optionValue, setOptionValue] = useState(initialOption)
 
-    const data = firebase.firestore().collection("shifts").get()
-        .then((snapshot) => {
-            let documents = []
-            snapshot.forEach((doc) => {
-                documents.push({ ...doc.data(), id: doc.id })
+    useEffect(() => {
+        const data = firebase.firestore().collection("shifts").get()
+            .then((snapshot) => {
+                let documents = []
+                snapshot.forEach((doc) => {
+                    documents.push({ ...doc.data(), id: doc.id })
+                })
+                setDocs(documents)
+                console.log('ran shifts' + docs)
             })
-            setDocs(documents)
+        return () => data()
+    }, [])
 
-        })
+
 
     function handleChange(e) {
         setOptionValue(e.target.value)
 
     }
+
     return (
         <>
 

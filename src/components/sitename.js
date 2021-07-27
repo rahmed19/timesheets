@@ -1,6 +1,6 @@
 import React from 'react'
 import FirebaseContext from '../context/firebase'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 
 
 export default function Sitename() {
@@ -10,14 +10,20 @@ export default function Sitename() {
     const [docs, setDocs] = useState([])
     const [optionValue, setOptionValue] = useState(initialOption)
 
-    const data = firebase.firestore().collection("sites").get()
-        .then((snapshot) => {
-            let documents = []
-            snapshot.forEach((doc) => {
-                documents.push({ ...doc.data(), id: doc.id })
+    useEffect(() => {
+        const data = firebase.firestore().collection("sites").get()
+            .then((snapshot) => {
+                let documents = []
+                snapshot.forEach((doc) => {
+                    documents.push({ ...doc.data(), id: doc.id })
+                })
+                setDocs(documents)
+                console.log('ran site' + docs)
             })
-            setDocs(documents)
-        })
+
+        return () => data()
+    }, [])
+
 
     function handleChange(e) {
         setOptionValue(e.target.value)

@@ -3,14 +3,14 @@ import FirebaseContext from '../context/firebase'
 import { useContext, useState } from 'react'
 
 
-export default function Sitename() {
-    const initialOption = '--Select your site'
+export default function Shifts() {
+    const initialOption = '--Select your shift'
 
     const { firebase } = useContext(FirebaseContext)
     const [docs, setDocs] = useState([])
     const [optionValue, setOptionValue] = useState(initialOption)
 
-    const data = firebase.firestore().collection("sites").get()
+    const data = firebase.firestore().collection("shifts").get()
         .then((snapshot) => {
             let documents = []
             snapshot.forEach((doc) => {
@@ -27,14 +27,14 @@ export default function Sitename() {
         <>
 
             <select
-                className="sitename"
+                className="shiftname"
                 onChange={handleChange}
                 value={optionValue}
             >
                 <option>{initialOption}</option>
                 <option></option>
                 {docs && docs.map((doc) => {
-                    return <option key={doc.id}>{doc.sitename}</option>
+                    return <option key={doc.id}>{doc.shifttime}</option>
                 })}
             </select>
             <br />

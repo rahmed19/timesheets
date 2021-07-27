@@ -17,6 +17,7 @@ export default function Shifts() {
                 documents.push({ ...doc.data(), id: doc.id })
             })
             setDocs(documents)
+
         })
 
     function handleChange(e) {
@@ -36,6 +37,7 @@ export default function Shifts() {
                 {docs && docs.map((doc) => {
                     return <option key={doc.id}>{doc.shifttime}</option>
                 })}
+                {console.log(docs)}
             </select>
             <br />
 

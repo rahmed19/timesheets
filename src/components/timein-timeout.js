@@ -8,17 +8,17 @@ function TimeinTimeout() {
         <>
             <input
                 aria-label="Enter your time in"
-                type="time"
+                type="text"
                 onChange={({ target }) => setTimeIn(target.value)}
                 value={timeIn}
             />
             <input
                 aria-label="Enter your time out"
-                type="time"
+                type="text"
                 onChange={({ target }) => setTimeOut(target.value)}
                 value={timeOut}
             />
-            {console.log(((Number(timeIn) - Number(timeOut)) / 100).toFixed(2))}
+            {console.log(((Number(timeOut) - Number(timeIn)) / 100).toFixed(2))}
         </>
     )
 }

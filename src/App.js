@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Sitename from './components/sitename'
 import Shifts from './components/shifts'
+import TimeinTimeout from './components/timein-timeout';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <form className="timesheet">
           <Sitename />
           <Shifts />
+          <TimeinTimeout />
           <Sitename />
           <Sitename />
         </form>

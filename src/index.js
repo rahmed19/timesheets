@@ -5,9 +5,7 @@ import App from './App';
 import FirebaseContext from './context/firebase'
 import { firebase, FieldValue } from './lib/firebase'
 
-// console.log(firebase.firestore().collection('sites').get().then((doc) => {
-//   console.log(doc)
-// }))
+
 ReactDOM.render(
   <FirebaseContext.Provider value={{ firebase, FieldValue }}>
     <App />

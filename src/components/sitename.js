@@ -18,7 +18,7 @@ export default function Sitename() {
                     documents.push({ ...doc.data(), id: doc.id })
                 })
                 setDocs(documents)
-                console.log('ran site' + docs)
+
             })
 
         return () => data()

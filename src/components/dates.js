@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from 'react'
-import { addDays, getMonth, getDate, setDate } from 'date-fns'
+import { getDaysInMonth, getDate, format } from 'date-fns'
 import Sitename from '../components/sitename'
 import TimeinTimeout from '../components/timein-timeout';
 
 export default function Dates() {
     const currentDate = getDate(Date.now())
+    const formattedMonth = format(Date.now(), 'MMM')
+    const formattedYear = format(Date.now(), 'yyyy')
+    const daysInMonth = getDaysInMonth(Date.now())
+
     const [datesArray, setDatesArray] = useState([])
 
     function displayFirstTwoWeeks() {
+        let newArray = []
+        for (let i = 1; i <= 15; i++) {
 
+            newArray.push(`${formattedMonth} ${i}, ${formattedYear}`)
+        }
+        console.log(newArray)
+        setDatesArray(newArray)
 
         return console.log('first two weeks')
     }
 
     function displaySecondTwoWeeks() {
         let newArray = []
-        for (let i = 1; i <= 15; i++) {
-            newArray.push(i)
+        for (let i = 16; i <= daysInMonth; i++) {
+
+            newArray.push(`${formattedMonth} ${i}, ${formattedYear}`)
         }
+        console.log(newArray)
         setDatesArray(newArray)
 
     }
@@ -28,22 +40,22 @@ export default function Dates() {
 
         } else {
             displaySecondTwoWeeks()
-            console.log(datesArray)
+            console.log(daysInMonth)
         }
     }, [])
 
 
     return (
         <>
-            <h1>Current<p>{datesArray && datesArray.map((date, index) => {
+            <p>{datesArray && datesArray.map((date, index) => {
                 return (
                     <>
-                        <h1 key={index}>{date}</h1>
+                        {date}
                         <Sitename />
-                        <TimeinTimeout />
+                        <TimeinTimeout /><p />
                     </>
                 )
-            })}</p></h1>
+            })}</p>
         </>
     )
 }

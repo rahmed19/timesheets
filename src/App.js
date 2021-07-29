@@ -12,8 +12,6 @@ function App() {
       <div className="App">
         <h1>True Canadian Security Corp. Payroll Log</h1>
         <form className="timesheet">
-          <Sitename />
-          <TimeinTimeout />
           <Dates />
         </form>
       </div>

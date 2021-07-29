@@ -12,10 +12,16 @@ function App() {
     for (let i = 0; i <= 15; i++) {
       let totalInput = document.getElementById(i)
       sumOfHours.push(parseInt(totalInput.value))
-      totalInput && console.log(totalInput.value)
     }
 
-    console.log(sumOfHours)
+    let total = 0
+    for (var i in sumOfHours) {
+      total += sumOfHours[i]
+    }
+
+    setTotalhours(total)
+    console.log(total)
+    total = 0
 
   }
 

@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Sitename from './components/sitename'
 import TimeinTimeout from './components/timein-timeout';
+import Dates from './components/dates';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <form className="timesheet">
           <Sitename />
           <TimeinTimeout />
+          <Dates />
         </form>
       </div>
     </>

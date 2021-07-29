@@ -43,7 +43,6 @@ export default function Sitename() {
                     return <option key={doc.id}>{doc.sitename}</option>
                 })}
             </select>
-            <br />
 
         </>
     )

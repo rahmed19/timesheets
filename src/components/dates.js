@@ -52,7 +52,7 @@ export default function Dates() {
                     <>
                         {date}
                         <Sitename />
-                        <TimeinTimeout /><p />
+                        <TimeinTimeout index={index} /><p />
                     </>
                 )
             })}</p>

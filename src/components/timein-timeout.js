@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 
-function TimeinTimeout() {
+function TimeinTimeout({ index }) {
     const [timeIn, setTimeIn] = useState('')
     const [timeOut, setTimeOut] = useState('')
+    const [totalTime, setTotalTime] = useState(0)
 
     function handleTimeInChange(e) {
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
@@ -14,8 +15,14 @@ function TimeinTimeout() {
     function handleTimeOutChange(e) {
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
             setTimeOut(e.target.value)
-        } else
-            setTimeOut('')
+        }
+
+    }
+
+    function handleTotalTimeChange(e) {
+        if ((/[a-zA-Z]/).test(e.target.value) === false) {
+            setTotalTime(e.target.value)
+        }
 
     }
 
@@ -34,6 +41,14 @@ function TimeinTimeout() {
                 maxLength="4"
                 onChange={handleTimeOutChange}
                 value={timeOut}
+            />
+            <input
+                id={index}
+                aria-label="Enter your total time worked"
+                type="number"
+                max="24"
+                onChange={handleTotalTimeChange}
+                value={totalTime}
             />
             {console.log(((Number(timeOut) - Number(timeIn)) / 100).toFixed(2))}
         </>

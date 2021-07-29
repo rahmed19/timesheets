@@ -1,11 +1,23 @@
 import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
 import Dates from './components/dates';
 
 function App() {
+  const [totalHours, setTotalhours] = useState(null)
 
-  let totalInput = document.getElementById(0)
-  totalInput && console.log(totalInput.value)
+  function handleClick() {
+    console.log('button clicked')
+    let sumOfHours = []
+    for (let i = 0; i <= 15; i++) {
+      let totalInput = document.getElementById(i)
+      sumOfHours.push(parseInt(totalInput.value))
+      totalInput && console.log(totalInput.value)
+    }
+
+    console.log(sumOfHours)
+
+  }
 
   return (
     <>
@@ -16,7 +28,7 @@ function App() {
 
         </form>
       </div>
-      <button onClick={() => { }}>Button for {totalInput && totalInput.value}</button>
+      <button onClick={() => handleClick()}>Button for {totalHours}</button>
     </>
   );
 }

@@ -40,7 +40,6 @@ export default function Dates() {
 
         } else {
             displaySecondTwoWeeks()
-            console.log(daysInMonth)
         }
     }, [])
 

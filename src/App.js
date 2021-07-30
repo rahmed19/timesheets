@@ -6,8 +6,11 @@ import Dates from './components/dates';
 function App() {
   const [totalHours, setTotalhours] = useState(null)
 
+
+
   function handleClick() {
     console.log('button clicked')
+    // retrieve hours from sheet by using index ID
     let sumOfHours = []
     for (let i = 0; i <= 15; i++) {
       let totalInput = document.getElementById(i)

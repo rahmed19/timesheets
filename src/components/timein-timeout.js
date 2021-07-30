@@ -43,6 +43,7 @@ function TimeinTimeout({ index }) {
                 value={timeOut}
             />
             <input
+                //index number to appropriate scalable input ID
                 id={index}
                 aria-label="Enter your total time worked"
                 type="number"

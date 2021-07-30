@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 
-function TimeinTimeout({ index }) {
+
+function TimeinTimeout({
+    //index number to appropriate scalable input ID
+    index
+}) {
+
     const [timeIn, setTimeIn] = useState('')
     const [timeOut, setTimeOut] = useState('')
     const [totalTime, setTotalTime] = useState(0)
+
 
     function handleTimeInChange(e) {
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
@@ -20,7 +26,9 @@ function TimeinTimeout({ index }) {
     }
 
     function handleTotalTimeChange(e) {
+
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
+
             setTotalTime(e.target.value)
         }
 
@@ -49,7 +57,7 @@ function TimeinTimeout({ index }) {
                 type="number"
                 max="24"
                 onChange={handleTotalTimeChange}
-                value={totalTime}
+                value={totalTime === 0 ? '' : totalTime}
             />
             {console.log(((Number(timeOut) - Number(timeIn)) / 100).toFixed(2))}
         </>

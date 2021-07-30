@@ -4,7 +4,7 @@ import './App.css';
 import Dates from './components/dates';
 
 function App() {
-  const [totalHours, setTotalhours] = useState(null)
+  const [totalHours, setTotalhours] = useState(0)
 
 
 
@@ -19,7 +19,10 @@ function App() {
 
     let total = 0
     for (var i in sumOfHours) {
-      total += sumOfHours[i]
+      //check to see if value in total hours is a number
+      if (isNaN(sumOfHours[i]) === false) {
+        total += sumOfHours[i]
+      }
     }
 
     setTotalhours(total)

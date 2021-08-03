@@ -17,8 +17,9 @@ export default function Dates({ triggerChange, setTriggerChange }) {
     function displayFirstTwoWeeks() {
         let newArray = []
         for (let i = 1; i <= 15; i++) {
+            //add and format day of the week, date, month and year
+            newArray.push(`${format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'EEE')} ${formattedMonth} ${i}, ${formattedYear}`)
 
-            newArray.push(`${format(add(new Date(currentYear, currentMonth, i - 1), { days: i }), 'EEE')} ${formattedMonth} ${i}, ${formattedYear}`)
         }
         console.log(newArray)
         setDatesArray(newArray)
@@ -29,8 +30,8 @@ export default function Dates({ triggerChange, setTriggerChange }) {
     function displaySecondTwoWeeks() {
         let newArray = []
         for (let i = 16; i <= daysInMonth; i++) {
-
-            newArray.push(`${formattedMonth} ${i}, ${formattedYear}`)
+            //add and format day of the week, date, month and year
+            newArray.push(`${format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'EEE')} ${formattedMonth} ${i}, ${formattedYear}`)
         }
         console.log(newArray)
         setDatesArray(newArray)
@@ -38,7 +39,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
     }
 
     useEffect(() => {
-        if (currentDate <= 15) {
+        if (currentDate >= 15) {
             displayFirstTwoWeeks()
 
         } else {

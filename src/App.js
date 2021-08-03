@@ -14,7 +14,7 @@ function App() {
     let sumOfHours = []
     for (let i = 0; i <= 15; i++) {
       let totalInput = document.getElementById(i)
-      sumOfHours.push(parseInt(totalInput.value))
+      totalInput && sumOfHours.push(parseInt(totalInput.value))
     }
 
     let total = 0

@@ -30,7 +30,7 @@ export default function TotalHours({ triggerChange }) {
 
     return (
         <>
-            <input
+            Total Hours Worked: <input
                 aria-label="Total hours worked"
                 type="text"
                 value={totalWeeklyHours}

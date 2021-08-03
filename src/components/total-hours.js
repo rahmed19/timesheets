@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export default function TotalHours({ triggerChange, setTriggerChange }) {
+export default function TotalHours({ triggerChange }) {
 
     const [totalWeeklyHours, setTotalWeeklyHours] = useState(0)
 

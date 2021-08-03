@@ -13,7 +13,7 @@ function App() {
         <h1>True Canadian Security Corp. Payroll Log</h1>
         <form className="timesheet">
           <Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
-          <TotalHours triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
+          <TotalHours triggerChange={triggerChange} />
         </form>
       </div>
     </>

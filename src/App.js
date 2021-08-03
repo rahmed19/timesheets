@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import React, { useState } from 'react'
 import './App.css';
 import Dates from './components/dates';
+import TotalHours from './components/total-hours';
 
 function App() {
   const [totalHours, setTotalhours] = useState(0)
@@ -37,7 +38,7 @@ function App() {
         <h1>True Canadian Security Corp. Payroll Log</h1>
         <form className="timesheet">
           <Dates />
-
+          <TotalHours />
         </form>
       </div>
       <button onClick={() => handleClick()}>Button for {totalHours}</button>

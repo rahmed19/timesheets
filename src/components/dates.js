@@ -3,7 +3,7 @@ import { getDaysInMonth, getDate, format } from 'date-fns'
 import Sitename from '../components/sitename'
 import TimeinTimeout from '../components/timein-timeout';
 
-export default function Dates() {
+export default function Dates({ triggerChange, setTriggerChange }) {
     const currentDate = getDate(Date.now())
     const formattedMonth = format(Date.now(), 'MMM')
     const formattedYear = format(Date.now(), 'yyyy')
@@ -51,7 +51,7 @@ export default function Dates() {
                     <>
                         {date}
                         <Sitename />
-                        <TimeinTimeout index={index} /><p />
+                        <TimeinTimeout index={index} triggerChange={triggerChange} setTriggerChange={setTriggerChange} /><p />
                     </>
                 )
             })}</p>

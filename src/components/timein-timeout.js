@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 
 function TimeinTimeout({
     //index number to appropriate scalable input ID
-    index
+    index,
+    triggerChange,
+    setTriggerChange
 }) {
 
     const [timeIn, setTimeIn] = useState('')
@@ -31,7 +33,7 @@ function TimeinTimeout({
 
             setTotalTime(e.target.value)
         }
-
+        setTriggerChange(!triggerChange)
     }
 
     return (

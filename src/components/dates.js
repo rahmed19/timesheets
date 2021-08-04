@@ -21,7 +21,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
             newArray.push(`${format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'EEE')} ${formattedMonth} ${i}, ${formattedYear}`)
 
         }
-        console.log(newArray)
+
         setDatesArray(newArray)
 
         return console.log('first two weeks')
@@ -35,7 +35,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
         }
         console.log(newArray)
         setDatesArray(newArray)
-
+        return console.log('second two weeks')
     }
 
     useEffect(() => {

@@ -2,13 +2,13 @@ import React from 'react'
 
 export default function GrabContents() {
 
-    let allContentsArray = []
+    let allDatesArray = []
     for (let i = 0; i < 15; i++) {
-        let contents = document.getElementById(`date-${i}`)
-        //contents && console.log('dates -', contents.value)
+        let dateContents = document.getElementById(`date-${i}`)
+        dateContents && console.log('dates -', dateContents.value)
 
-        contents && allContentsArray.push(contents.value)
-        console.log(allContentsArray)
+        dateContents && allDatesArray.push(dateContents.value)
+        //console.log(allDatesArray)
     }
 
     return (

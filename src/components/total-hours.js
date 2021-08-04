@@ -9,7 +9,7 @@ export default function TotalHours({ triggerChange }) {
         // retrieve hours from sheet by using index ID
         let sumOfHours = []
         for (let i = 0; i <= 15; i++) {
-            let totalInput = document.getElementById(i)
+            let totalInput = document.getElementById(`hoursWorked-${i}`)
             totalInput && sumOfHours.push(parseInt(totalInput.value))
         }
 
@@ -31,6 +31,7 @@ export default function TotalHours({ triggerChange }) {
     return (
         <>
             Total Hours Worked: <input
+                id="totalWeeklyHours"
                 aria-label="Total hours worked"
                 type="text"
                 value={totalWeeklyHours}

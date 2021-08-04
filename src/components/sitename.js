@@ -3,7 +3,7 @@ import FirebaseContext from '../context/firebase'
 import { useContext, useState, useEffect } from 'react'
 
 
-export default function Sitename() {
+export default function Sitename({ index }) {
     const initialOption = '--Select your site'
 
     const { firebase } = useContext(FirebaseContext)
@@ -33,6 +33,7 @@ export default function Sitename() {
         <>
 
             <select
+                id={`sitename-${index}`}
                 className="sitename"
                 onChange={handleChange}
                 value={optionValue}

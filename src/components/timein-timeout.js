@@ -10,7 +10,7 @@ function TimeinTimeout({
 
     const [timeIn, setTimeIn] = useState('')
     const [timeOut, setTimeOut] = useState('')
-    const [totalTime, setTotalTime] = useState(0)
+    const [hoursWorked, setHoursWorked] = useState(0)
 
 
     function handleTimeInChange(e) {
@@ -31,7 +31,7 @@ function TimeinTimeout({
 
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
 
-            setTotalTime(e.target.value)
+            setHoursWorked(e.target.value)
         }
         setTriggerChange(!triggerChange)
     }
@@ -39,6 +39,7 @@ function TimeinTimeout({
     return (
         <>
             <input
+                id={`signIn-${index}`}
                 aria-label="Enter your time in"
                 type="text"
                 maxLength="4"
@@ -46,6 +47,7 @@ function TimeinTimeout({
                 value={timeIn}
             />
             <input
+                id={`signOut-${index}`}
                 aria-label="Enter your time out"
                 type="text"
                 maxLength="4"
@@ -54,12 +56,12 @@ function TimeinTimeout({
             />
             <input
                 //index number to appropriate scalable input ID
-                id={index}
+                id={`hoursWorked-${index}`}
                 aria-label="Enter your total time worked"
                 type="number"
                 max="24"
                 onChange={handleTotalTimeChange}
-                value={totalTime === 0 ? '' : totalTime}
+                value={hoursWorked === 0 ? '' : hoursWorked}
             />
             {console.log(((Number(timeOut) - Number(timeIn)) / 100).toFixed(2))}
         </>

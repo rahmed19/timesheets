@@ -39,7 +39,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
     }
 
     useEffect(() => {
-        if (currentDate >= 15) {
+        if (currentDate <= 15) {
             displayFirstTwoWeeks()
 
         } else {
@@ -54,7 +54,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
                 return (
                     <>
 
-                        {date}
+                        <div id={`date-${index}`}>{date}</div>
                         <Sitename />
                         <TimeinTimeout index={index} triggerChange={triggerChange} setTriggerChange={setTriggerChange} /><p />
                     </>

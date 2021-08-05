@@ -1,6 +1,21 @@
 import React, { useEffect } from 'react'
+import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
 export default function GrabContents({ allContents, setAllContents, triggerChange }) {
+
+    const currentDate = getDate(Date.now())
+    const currentMonth = getMonth(Date.now())
+    const currentYear = getYear(Date.now())
+    const daysInMonth = getDaysInMonth(Date.now())
+
+    let id = 0
+    if (currentDate <= 15) {
+        let currentYearString = currentYear.toString()
+        let currentMonthString = currentMonth.toString()
+        id = parseInt(1 + currentMonthString + currentYearString)
+
+    }
+
 
     useEffect(() => {
         let allDatesArray = []
@@ -37,8 +52,10 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
 
         }
+
         setAllContents({
-            userId: 0,
+            id: id,
+            employeeId: "0000",
             name: "",
             actualDates: "",
             formattedDates: allDatesArray,
@@ -49,6 +66,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             totalWeeklyHours: allTotalWeeklyHours
         })
         console.log(allContents)
+        console.log(id)
     }, [triggerChange])
 
 

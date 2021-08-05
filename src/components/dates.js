@@ -7,10 +7,10 @@ export default function Dates({ triggerChange, setTriggerChange }) {
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
     const currentYear = getYear(Date.now())
+    const daysInMonth = getDaysInMonth(Date.now())
     const formattedMonth = format(Date.now(), 'MMM')
     const formattedYear = format(Date.now(), 'yyyy')
 
-    const daysInMonth = getDaysInMonth(Date.now())
 
     const [datesArray, setDatesArray] = useState([])
 

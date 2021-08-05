@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import FirebaseContext from '../context/firebase'
 import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
 export default function GrabContents({ allContents, setAllContents, triggerChange }) {
 
     const { firebase } = useContext(FirebaseContext)
+    const [gottenContent, setGottenContent] = useState([])
 
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
@@ -75,16 +76,31 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         console.log(allContents.collectionId)
     }, [triggerChange])
 
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault()
         console.log(allContents)
         const firebaseDoc = allContents.datesFilter
         const employeeId = allContents.employeeId
         firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`).set(allContents)
     }
 
+    function handleCollect(e) {
+        e.preventDefault()
+        firebase.firestore().collection('0003').get()
+            .then((snapshot) => {
+                const gottenItems = snapshot.docs.map((contentObj) => ({
+                    ...contentObj.data()
+                }))
+                setGottenContent(gottenItems)
+            })
+
+        gottenContent && console.log(gottenContent)
+    }
+
     return (
         <>
             <button onClick={handleSubmit}>Submit Data</button>
+            <button onClick={handleCollect}>Collect Data</button>
         </>
     )
 }

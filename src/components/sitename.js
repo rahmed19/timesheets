@@ -37,6 +37,7 @@ export default function Sitename({ index }) {
                 className="sitename"
                 onChange={handleChange}
                 value={optionValue}
+
             >
                 <option>{initialOption}</option>
                 <option></option>

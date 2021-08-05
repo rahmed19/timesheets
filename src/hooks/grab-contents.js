@@ -8,12 +8,16 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
     const currentYear = getYear(Date.now())
     const daysInMonth = getDaysInMonth(Date.now())
 
-    let id = 0
+    //setup firebase collection name based on what week it is plus adding month and year to get a unique collection ID
+    let collection = 0
     if (currentDate <= 15) {
         let currentYearString = currentYear.toString()
         let currentMonthString = currentMonth.toString()
-        id = parseInt(1 + currentMonthString + currentYearString)
-
+        collection = parseInt(1 + currentMonthString + currentYearString)
+    } else {
+        let currentYearString = currentYear.toString()
+        let currentMonthString = currentMonth.toString()
+        collection = parseInt(2 + currentMonthString + currentYearString)
     }
 
 
@@ -54,7 +58,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         }
 
         setAllContents({
-            id: id,
+            collectionId: collection,
             employeeId: "0000",
             name: "",
             actualDates: "",
@@ -65,8 +69,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             hoursWorked: allHoursWorkedArray,
             totalWeeklyHours: allTotalWeeklyHours
         })
-        console.log(allContents)
-        console.log(id)
+        console.log(collection)
     }, [triggerChange])
 
 

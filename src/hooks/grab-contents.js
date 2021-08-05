@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import FirebaseContext from '../context/firebase'
 import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
 export default function GrabContents({ allContents, setAllContents, triggerChange }) {
+
+    const { firebase } = useContext(FirebaseContext)
 
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
@@ -9,15 +12,15 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
     const daysInMonth = getDaysInMonth(Date.now())
 
     //setup firebase collection name based on what week it is plus adding month and year to get a unique collection ID
-    let collection = 0
+    let datesFilter = 0
     if (currentDate <= 15) {
         let currentYearString = currentYear.toString()
         let currentMonthString = currentMonth.toString()
-        collection = parseInt(1 + currentMonthString + currentYearString)
+        datesFilter = parseInt(1 + currentMonthString + currentYearString)
     } else {
         let currentYearString = currentYear.toString()
         let currentMonthString = currentMonth.toString()
-        collection = parseInt(2 + currentMonthString + currentYearString)
+        datesFilter = parseInt(2 + currentMonthString + currentYearString)
     }
 
 
@@ -58,8 +61,8 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         }
 
         setAllContents({
-            collectionId: collection,
-            employeeId: "0000",
+            datesFilter: datesFilter,
+            employeeId: "0003",
             name: "",
             actualDates: "",
             formattedDates: allDatesArray,
@@ -69,13 +72,19 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             hoursWorked: allHoursWorkedArray,
             totalWeeklyHours: allTotalWeeklyHours
         })
-        console.log(collection)
+        console.log(allContents.collectionId)
     }, [triggerChange])
 
+    function handleSubmit() {
+        console.log(allContents)
+        const firebaseDoc = allContents.datesFilter
+        const employeeId = allContents.employeeId
+        firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`).set(allContents)
+    }
 
     return (
         <>
-
+            <button onClick={handleSubmit}>Submit Data</button>
         </>
     )
 }

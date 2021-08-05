@@ -76,6 +76,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         console.log(allContents.collectionId)
     }, [triggerChange])
 
+    //submit data  to firebase
     function handleSubmit(e) {
         e.preventDefault()
         console.log(allContents)
@@ -84,17 +85,20 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`).set(allContents)
     }
 
-    function handleCollect(e) {
+    //collect data from firebase
+    async function handleCollect(e) {
         e.preventDefault()
-        firebase.firestore().collection('0003').get()
-            .then((snapshot) => {
-                const gottenItems = snapshot.docs.map((contentObj) => ({
-                    ...contentObj.data()
-                }))
-                setGottenContent(gottenItems)
-            })
 
-        gottenContent && console.log(gottenContent)
+        const firebaseDoc = allContents.datesFilter
+        const employeeId = allContents.employeeId
+        const collectionRef = firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`)
+        const doc = await collectionRef.get()
+        if (!doc.exists) {
+            console.log('no such document')
+        } else {
+            console.log(doc.data())
+        }
+
     }
 
     return (

@@ -1,16 +1,16 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import FirebaseContext from '../context/firebase'
 import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
 export default function GrabContents({ allContents, setAllContents, triggerChange }) {
 
     const { firebase } = useContext(FirebaseContext)
-    const [isSubmitted, setIsSubmitted] = useState(!allContents.isSubmitted)
 
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
     const currentYear = getYear(Date.now())
     const daysInMonth = getDaysInMonth(Date.now())
+
 
     //setup firebase collection name based on what week it is plus adding month and year to get a unique collection ID
     let datesFilter = 0
@@ -63,9 +63,8 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         }
 
         setAllContents({
-            isSubmitted: isSubmitted,
             datesFilter: datesFilter,
-            employeeId: "0004",
+            employeeId: "0007",
             name: "",
             actualDates: "",
             formattedDates: allDatesArray,
@@ -101,9 +100,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         } else {
             console.log(doc.data())
             setAllContents(doc.data())
-            // change submitted setting to false
-            await setIsSubmitted(!allContents.isSubmitted)
-            console.log(isSubmitted)
+
         }
 
     }

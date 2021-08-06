@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React, { useState, useContext } from 'react'
+import React, { useState, } from 'react'
 import './App.css';
 import Dates from './components/dates';
 import TotalHours from './components/total-hours';

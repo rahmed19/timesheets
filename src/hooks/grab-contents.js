@@ -5,6 +5,7 @@ import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 export default function GrabContents({ allContents, setAllContents, triggerChange }) {
 
     const { firebase } = useContext(FirebaseContext)
+    const [isSubmitted, setIsSubmitted] = useState(!allContents.isSubmitted)
 
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
@@ -31,6 +32,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         let allSignOutArray = []
         let allHoursWorkedArray = []
         let allTotalWeeklyHours = 0
+
 
         for (let i = 0; i < 15; i++) {
             //formatted dates
@@ -61,8 +63,9 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         }
 
         setAllContents({
+            isSubmitted: isSubmitted,
             datesFilter: datesFilter,
-            employeeId: "0003",
+            employeeId: "0004",
             name: "",
             actualDates: "",
             formattedDates: allDatesArray,
@@ -72,16 +75,17 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             hoursWorked: allHoursWorkedArray,
             totalWeeklyHours: allTotalWeeklyHours
         })
-        console.log(allContents.collectionId)
+        console.log(allContents.isSubmitted)
     }, [triggerChange])
 
     //submit data  to firebase
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         console.log(allContents)
         const firebaseDoc = allContents.datesFilter
         const employeeId = allContents.employeeId
-        firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`).set(allContents)
+        await firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`).set(allContents)
+
     }
 
     //collect data from firebase
@@ -97,6 +101,9 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         } else {
             console.log(doc.data())
             setAllContents(doc.data())
+            // change submitted setting to false
+            await setIsSubmitted(!allContents.isSubmitted)
+            console.log(isSubmitted)
         }
 
     }

@@ -5,7 +5,6 @@ import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 export default function GrabContents({ allContents, setAllContents, triggerChange }) {
 
     const { firebase } = useContext(FirebaseContext)
-    const [gottenContent, setGottenContent] = useState([])
 
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
@@ -97,6 +96,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             console.log('no such document')
         } else {
             console.log(doc.data())
+            setAllContents(doc.data())
         }
 
     }

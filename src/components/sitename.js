@@ -3,7 +3,7 @@ import FirebaseContext from '../context/firebase'
 import { useContext, useState, useEffect } from 'react'
 
 
-export default function Sitename({ index }) {
+export default function Sitename({ index, triggerChange, setTriggerChange }) {
     const initialOption = '--Select your site'
 
     const { firebase } = useContext(FirebaseContext)
@@ -27,6 +27,7 @@ export default function Sitename({ index }) {
 
     function handleChange(e) {
         setOptionValue(e.target.value)
+        setTriggerChange(!triggerChange)
 
     }
     return (

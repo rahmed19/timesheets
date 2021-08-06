@@ -55,7 +55,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
                     <>
 
                         <div id={`date-${index}`}>{date}</div>
-                        <Sitename index={index} />
+                        <Sitename index={index} triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
                         <TimeinTimeout index={index} triggerChange={triggerChange} setTriggerChange={setTriggerChange} /><p />
                     </>
                 )

@@ -12,7 +12,7 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
     const daysInMonth = getDaysInMonth(Date.now())
 
 
-    //setup firebase collection name based on what week it is plus adding month and year to get a unique collection ID
+    //setup firebase subcollection name based on what week it is plus adding month and year to get a unique collection ID
     let datesFilter = 0
     if (currentDate <= 15) {
         let currentYearString = currentYear.toString()

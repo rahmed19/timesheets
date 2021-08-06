@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import FirebaseContext from '../context/firebase'
 import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
-export default function GrabContents({ allContents, setAllContents, triggerChange }) {
+export default function GrabContents() {
 
     const { firebase } = useContext(FirebaseContext)
 
@@ -10,6 +10,8 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
     const currentMonth = getMonth(Date.now())
     const currentYear = getYear(Date.now())
     const daysInMonth = getDaysInMonth(Date.now())
+
+    let allTotalWeeklyHours = 0
 
 
     //setup firebase subcollection name based on what week it is plus adding month and year to get a unique collection ID
@@ -24,14 +26,15 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
         datesFilter = parseInt(2 + currentMonthString + currentYearString)
     }
 
-
-    useEffect(() => {
+    //submit data  to firebase
+    async function handleSubmit(e) {
+        e.preventDefault()
         let allDatesArray = []
         let allSitenamesArray = []
         let allSignInArray = []
         let allSignOutArray = []
         let allHoursWorkedArray = []
-        let allTotalWeeklyHours = 0
+
 
 
         for (let i = 0; i < 15; i++) {
@@ -54,15 +57,13 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             //hoursWorked
             let hoursWorkedContents = document.getElementById(`hoursWorked-${i}`)
             hoursWorkedContents && allHoursWorkedArray.push(hoursWorkedContents.value)
-
-            //totalWeeklyHours
-
-            let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
-            allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
-
         }
+        //totalWeeklyHours
 
-        setAllContents({
+        let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
+        allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
+
+        await firebase.firestore().collection('0001').doc('172021').set({
             datesFilter: datesFilter,
             employeeId: "0001",
             name: "",
@@ -74,16 +75,6 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
             hoursWorked: allHoursWorkedArray,
             totalWeeklyHours: allTotalWeeklyHours
         })
-        console.log(allContents.isSubmitted)
-    }, [triggerChange])
-
-    //submit data  to firebase
-    async function handleSubmit(e) {
-        e.preventDefault()
-        console.log(allContents)
-        const firebaseDoc = allContents.datesFilter
-        const employeeId = allContents.employeeId
-        await firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`).set(allContents)
 
     }
 
@@ -91,51 +82,44 @@ export default function GrabContents({ allContents, setAllContents, triggerChang
     async function handleCollect(e) {
         e.preventDefault()
 
-        const firebaseDoc = allContents.datesFilter
-        const employeeId = allContents.employeeId
-        const collectionRef = firebase.firestore().collection(`${employeeId}`).doc(`${firebaseDoc}`)
+
+        const collectionRef = firebase.firestore().collection('0001').doc('172021')
         const doc = await collectionRef.get()
         if (!doc.exists) {
             console.log('no such document')
         } else {
             console.log(doc.data())
-            setAllContents(doc.data())
             for (let i = 0; i < 15; i++) {
-                // //formatted dates
-                // let dateContents = document.getElementById(`date-${i}`)
-                // dateContents.innerText = allContents.dateContents[i]
 
                 //sitename
                 let sitenameContents = document.getElementById(`sitename-${i}`)
-                sitenameContents.value = allContents.siteName
+                sitenameContents.value = doc.data().siteName[i]
 
-                // //signIn
-                // let signInContents = document.getElementById(`signIn-${i}`)
-                // signInContents && allSignInArray.push(signInContents.value)
+                //signIn
+                let signInContents = document.getElementById(`signIn-${i}`)
+                signInContents.value = doc.data().signIn[i]
 
-                // //signOut
-                // let signOutContents = document.getElementById(`signOut-${i}`)
-                // signOutContents && allSignOutArray.push(signOutContents.value)
+                //signOut
+                let signOutContents = document.getElementById(`signOut-${i}`)
+                signOutContents.value = doc.data().signOut[i]
 
-                // //hoursWorked
-                // let hoursWorkedContents = document.getElementById(`hoursWorked-${i}`)
-                // hoursWorkedContents && allHoursWorkedArray.push(hoursWorkedContents.value)
-
-                // //totalWeeklyHours
-
-                // let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
-                // allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
+                //hoursWorked
+                let hoursWorkedContents = document.getElementById(`hoursWorked-${i}`)
+                hoursWorkedContents.value = doc.data().hoursWorked[i]
 
             }
+            let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
+            totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
 
         }
 
     }
 
     return (
-        <>
+        <><p>
             <button onClick={handleSubmit}>Submit Data</button>
             <button onClick={handleCollect}>Collect Data</button>
+        </p>
         </>
     )
 }

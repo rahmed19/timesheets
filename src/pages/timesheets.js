@@ -6,7 +6,6 @@ import GrabContents from '../hooks/grab-contents';
 function Timesheets() {
 
     const [triggerChange, setTriggerChange] = useState(false)
-    const [allContents, setAllContents] = useState({})
 
     return (
         <>
@@ -15,7 +14,7 @@ function Timesheets() {
                 <form className="timesheet">
                     <Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
                     <TotalHours triggerChange={triggerChange} />
-                    <GrabContents allContents={allContents} setAllContents={setAllContents} triggerChange={triggerChange} />
+                    <GrabContents />
                 </form>
 
 

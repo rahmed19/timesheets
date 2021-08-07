@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 function TimeinTimeout({
@@ -7,6 +7,10 @@ function TimeinTimeout({
     triggerChange,
     setTriggerChange
 }) {
+
+    useEffect(() => {
+        console.log('from the test zone', timeIn, timeOut, hoursWorked)
+    }, [triggerChange])
 
     const [timeIn, setTimeIn] = useState('')
     const [timeOut, setTimeOut] = useState('')
@@ -44,7 +48,7 @@ function TimeinTimeout({
                 type="text"
                 maxLength="4"
                 onChange={handleTimeInChange}
-                value={timeIn}
+            // value={timeIn}
             />
             <input
                 id={`signOut-${index}`}
@@ -52,7 +56,7 @@ function TimeinTimeout({
                 type="text"
                 maxLength="4"
                 onChange={handleTimeOutChange}
-                value={timeOut}
+            // value={timeOut}
             />
             <input
                 //index number to appropriate scalable input ID
@@ -61,7 +65,7 @@ function TimeinTimeout({
                 type="number"
                 max="24"
                 onChange={handleTotalTimeChange}
-                value={hoursWorked === 0 ? '' : hoursWorked}
+            // value={hoursWorked === 0 ? '' : hoursWorked}
             />
             {console.log(((Number(timeOut) - Number(timeIn)) / 100).toFixed(2))}
         </>

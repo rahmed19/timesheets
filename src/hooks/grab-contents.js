@@ -112,7 +112,7 @@ export default function GrabContents() {
             }
 
         }
-        fetchData()
+        return fetchData()
 
     }, [])
 

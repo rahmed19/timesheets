@@ -10,33 +10,33 @@ function TimeinTimeout({
 
 
 
-    const [timeIn, setTimeIn] = useState('')
-    const [timeOut, setTimeOut] = useState('')
-    const [hoursWorked, setHoursWorked] = useState(0)
+    // const [timeIn, setTimeIn] = useState('')
+    // const [timeOut, setTimeOut] = useState('')
+    // const [hoursWorked, setHoursWorked] = useState(0)
 
 
-    function handleTimeInChange(e) {
-        if ((/[a-zA-Z]/).test(e.target.value) === false) {
-            // setTimeIn(e.target.value)
-        }
+    // function handleTimeInChange(e) {
+    //     if ((/[a-zA-Z]/).test(e.target.value) === false) {
+    //         // setTimeIn(e.target.value)
+    //     }
 
-    }
+    // }
 
-    function handleTimeOutChange(e) {
-        if ((/[a-zA-Z]/).test(e.target.value) === false) {
-            //  setTimeOut(e.target.value)
-        }
+    // function handleTimeOutChange(e) {
+    //     if ((/[a-zA-Z]/).test(e.target.value) === false) {
+    //         //  setTimeOut(e.target.value)
+    //     }
 
-    }
+    // }
 
-    function handleTotalTimeChange(e) {
+    // function handleTotalTimeChange(e) {
 
-        // if ((/[a-zA-Z]/).test(e.target.value) === false) {
+    //     // if ((/[a-zA-Z]/).test(e.target.value) === false) {
 
-        //     setHoursWorked(e.target.value)
-        // }
-        setTriggerChange(!triggerChange)
-    }
+    //     //     setHoursWorked(e.target.value)
+    //     // }
+    //     setTriggerChange(!triggerChange)
+    // }
 
     return (
         <>
@@ -62,7 +62,7 @@ function TimeinTimeout({
                 aria-label="Enter your total time worked"
                 type="number"
                 max="24"
-                onChange={handleTotalTimeChange}
+                onChange={() => setTriggerChange(!triggerChange)}
             // value={hoursWorked === 0 ? '' : hoursWorked}
             />
         </>

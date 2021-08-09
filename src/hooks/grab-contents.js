@@ -92,27 +92,32 @@ export default function GrabContents() {
                 console.log('no such document')
             } else {
                 console.log(doc.data())
-                for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    for (let i = 0; i < 15; i++) {
 
-                    //sitename
-                    let sitenameContents = document.getElementById(`sitename-${i}`)
-                    sitenameContents.value = doc.data().siteName[i]
+                        //sitename
 
-                    //signIn
-                    let signInContents = document.getElementById(`signIn-${i}`)
-                    signInContents.value = doc.data().signIn[i]
+                        let sitenameContents = document.getElementById(`sitename-${i}`)
+                        sitenameContents.value = doc.data().siteName[i]
 
-                    //signOut
-                    let signOutContents = document.getElementById(`signOut-${i}`)
-                    signOutContents.value = doc.data().signOut[i]
 
-                    //hoursWorked
-                    let hoursWorkedContents = document.getElementById(`hoursWorked-${i}`)
-                    hoursWorkedContents.value = doc.data().hoursWorked[i]
 
-                }
-                let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
-                totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
+                        //signIn
+                        let signInContents = document.getElementById(`signIn-${i}`)
+                        signInContents.value = doc.data().signIn[i]
+
+                        //signOut
+                        let signOutContents = document.getElementById(`signOut-${i}`)
+                        signOutContents.value = doc.data().signOut[i]
+
+                        //hoursWorked
+                        let hoursWorkedContents = document.getElementById(`hoursWorked-${i}`)
+                        hoursWorkedContents.value = doc.data().hoursWorked[i]
+
+                    }
+                    let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
+                    totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
+                }, 500);
             }
 
         }

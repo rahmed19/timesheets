@@ -22,48 +22,18 @@ export default function Sitename({ index }) {
                     setDocs(documents)
 
                 })
-
-
-
-
         }
-        // setTimeout(() => {
-        //     const fetchSites = async () => {
-        //         const getSubmittedSites = await firebase.firestore().collection('0002').doc('172021')
-        //         const doc = await getSubmittedSites.get()
-        //         if (!doc.exists) {
-        //             console.log('no such document')
-        //         } else {
-        //             for (let i = 0; i < 15; i++) {
-
-        //                 //sitename
-        //                 let sitenameContents = document.getElementById(`sitename-${i}`)
-        //                 sitenameContents.value = doc.data().siteName[i]
-
-        //             }
-
-        //         }
-        //     }
-        //     return fetchSites()
-        // }, 1000)
 
         return fetchData()
     }, [])
 
 
-    // function handleChange(e) {
-    //     setOptionValue(e.target.value)
-
-    // }
     return (
         <>
 
             <select
                 id={`sitename-${index}`}
                 className="sitename"
-            // onChange={handleChange}
-            //value={optionValue}
-
             >
                 <option>{initialOption}</option>
                 <option></option>

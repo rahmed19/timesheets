@@ -100,8 +100,6 @@ export default function GrabContents() {
                         let sitenameContents = document.getElementById(`sitename-${i}`)
                         sitenameContents.value = doc.data().siteName[i]
 
-
-
                         //signIn
                         let signInContents = document.getElementById(`signIn-${i}`)
                         signInContents.value = doc.data().signIn[i]
@@ -117,7 +115,7 @@ export default function GrabContents() {
                     }
                     let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
                     totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
-                }, 500);
+                }, 10);
             }
 
         }

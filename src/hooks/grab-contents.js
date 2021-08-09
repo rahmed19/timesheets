@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import FirebaseContext from '../context/firebase'
 import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
@@ -20,6 +20,8 @@ export default function GrabContents() {
         let currentYearString = currentYear.toString()
         let currentMonthString = currentMonth.toString()
         datesFilter = parseInt(1 + currentMonthString + currentYearString)
+
+
     } else {
         let currentYearString = currentYear.toString()
         let currentMonthString = currentMonth.toString()
@@ -63,9 +65,9 @@ export default function GrabContents() {
         let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
         allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
 
-        await firebase.firestore().collection('0001').doc('172021').set({
+        await firebase.firestore().collection('0002').doc(`${datesFilter}`).set({
             datesFilter: datesFilter,
-            employeeId: "0001",
+            employeeId: "0002",
             name: "",
             actualDates: "",
             formattedDates: allDatesArray,
@@ -78,11 +80,13 @@ export default function GrabContents() {
 
     }
 
+
+
     // auto populate the fields if record exists.
     useEffect(() => {
         const fetchData = async () => {
 
-            const collectionRef = firebase.firestore().collection('0001').doc('172021')
+            const collectionRef = firebase.firestore().collection('0002').doc(`${datesFilter}`)
             const doc = await collectionRef.get()
             if (!doc.exists) {
                 console.log('no such document')
@@ -119,7 +123,7 @@ export default function GrabContents() {
     return (
         <><p>
             <button onClick={handleSubmit}>Submit Data</button>
-            {/* <button onClick={handleCollect}>Collect Data</button> */}
+            {/* <button onClick={handleHolidays}>Fetch Holidays</button> */}
         </p>
         </>
     )

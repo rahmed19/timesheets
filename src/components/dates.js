@@ -47,6 +47,12 @@ export default function Dates({ triggerChange, setTriggerChange }) {
         }
     }, [])
 
+    //get info on stat holidays
+    // async function handleHolidays() {
+    //     await fetch('https://canada-holidays.ca/api/v1/provinces/BC')
+    //         .then(response => response.json())
+    //         .then(data => console.log(data))
+    // }
 
     return (
         <>

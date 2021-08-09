@@ -8,9 +8,7 @@ function TimeinTimeout({
     setTriggerChange
 }) {
 
-    useEffect(() => {
-        console.log('from the test zone', timeIn, timeOut, hoursWorked)
-    }, [triggerChange])
+
 
     const [timeIn, setTimeIn] = useState('')
     const [timeOut, setTimeOut] = useState('')
@@ -19,24 +17,24 @@ function TimeinTimeout({
 
     function handleTimeInChange(e) {
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
-            setTimeIn(e.target.value)
+            // setTimeIn(e.target.value)
         }
 
     }
 
     function handleTimeOutChange(e) {
         if ((/[a-zA-Z]/).test(e.target.value) === false) {
-            setTimeOut(e.target.value)
+            //  setTimeOut(e.target.value)
         }
 
     }
 
     function handleTotalTimeChange(e) {
 
-        if ((/[a-zA-Z]/).test(e.target.value) === false) {
+        // if ((/[a-zA-Z]/).test(e.target.value) === false) {
 
-            setHoursWorked(e.target.value)
-        }
+        //     setHoursWorked(e.target.value)
+        // }
         setTriggerChange(!triggerChange)
     }
 
@@ -47,7 +45,7 @@ function TimeinTimeout({
                 aria-label="Enter your time in"
                 type="text"
                 maxLength="4"
-                onChange={handleTimeInChange}
+            //   onChange={handleTimeInChange}
             // value={timeIn}
             />
             <input
@@ -55,7 +53,7 @@ function TimeinTimeout({
                 aria-label="Enter your time out"
                 type="text"
                 maxLength="4"
-                onChange={handleTimeOutChange}
+            // onChange={handleTimeOutChange}
             // value={timeOut}
             />
             <input
@@ -67,7 +65,6 @@ function TimeinTimeout({
                 onChange={handleTotalTimeChange}
             // value={hoursWorked === 0 ? '' : hoursWorked}
             />
-            {console.log(((Number(timeOut) - Number(timeIn)) / 100).toFixed(2))}
         </>
     )
 }

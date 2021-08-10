@@ -1,6 +1,5 @@
 import React, { useState, } from 'react'
 import Dates from '../components/dates';
-import TotalHours from '../components/total-hours';
 import GrabContents from '../hooks/grab-contents';
 
 function Timesheets() {
@@ -13,7 +12,7 @@ function Timesheets() {
                 <h1>True Canadian Security Corp. Timesheets </h1>
                 <form className="timesheet">
                     <Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
-                    <TotalHours triggerChange={triggerChange} />
+
                     <GrabContents />
                 </form>
 

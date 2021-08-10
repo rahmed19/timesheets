@@ -22,7 +22,6 @@ export default function TotalHours({ triggerChange }) {
         }
 
         setTotalWeeklyHours(total)
-        console.log(total)
         total = 0
 
     }, [triggerChange])

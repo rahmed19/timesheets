@@ -126,7 +126,6 @@ export default function GrabContents() {
     return (
         <><p>
             <button onClick={handleSubmit}>Submit Data</button>
-            {/* <button onClick={handleHolidays}>Fetch Holidays</button> */}
         </p>
         </>
     )

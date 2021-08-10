@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getDaysInMonth, getDate, getMonth, getYear, add, format } from 'date-fns'
 import Sitename from '../components/sitename'
 import TimeinTimeout from '../components/timein-timeout';
+import TotalHours from '../components/total-hours';
 
 export default function Dates({ triggerChange, setTriggerChange }) {
     const currentDate = getDate(Date.now())
@@ -13,6 +14,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 
 
     const [datesArray, setDatesArray] = useState([])
+    const [statHolidays, setStatHolidays] = useState([])
 
     function displayFirstTwoWeeks() {
         let newArray = []
@@ -48,11 +50,15 @@ export default function Dates({ triggerChange, setTriggerChange }) {
     }, [])
 
     //get info on stat holidays
-    // async function handleHolidays() {
-    //     await fetch('https://canada-holidays.ca/api/v1/provinces/BC')
-    //         .then(response => response.json())
-    //         .then(data => console.log(data))
-    // }
+    async function handleHolidays() {
+        await fetch('https://canada-holidays.ca/api/v1/provinces/BC')
+            .then(response => response.json())
+            .then(data => {
+                setStatHolidays(data.province.holidays)
+
+                statHolidays && console.log(statHolidays[1].date)
+            })
+    }
 
     return (
         <>
@@ -63,9 +69,12 @@ export default function Dates({ triggerChange, setTriggerChange }) {
                         <div id={`date-${index}`}>{date}</div>
                         <Sitename index={index} />
                         <TimeinTimeout index={index} triggerChange={triggerChange} setTriggerChange={setTriggerChange} /><p />
+
                     </>
                 )
             })}</p>
+            <TotalHours triggerChange={triggerChange} />
+            <button onClick={handleHolidays}>Fetch Holidays</button>
         </>
     )
 }

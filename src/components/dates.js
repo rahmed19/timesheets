@@ -25,8 +25,6 @@ export default function Dates({ triggerChange, setTriggerChange }) {
         }
 
         setDatesArray(newArray)
-
-        return console.log('first two weeks')
     }
 
     function displaySecondTwoWeeks() {
@@ -37,7 +35,6 @@ export default function Dates({ triggerChange, setTriggerChange }) {
         }
         console.log(newArray)
         setDatesArray(newArray)
-        return console.log('second two weeks')
     }
 
     useEffect(() => {
@@ -55,10 +52,25 @@ export default function Dates({ triggerChange, setTriggerChange }) {
             .then(response => response.json())
             .then(data => {
                 setStatHolidays(data.province.holidays)
-
-                statHolidays && console.log(statHolidays[1].date)
             })
+        await console.log('date ' + currentDate)
+        await console.log('month ' + currentMonth)
+        await console.log('year ' + currentYear)
+        await console.log('days in the month ' + daysInMonth)
+        if (statHolidays[2] !== undefined) {
+            console.log(statHolidays[2].date)
+            let stat = statHolidays[2].date
+            let statYear = stat.substr(0, 4)
+            console.log(statYear)
+            let statMonth = stat.substr(5, 2)
+            console.log(statMonth)
+            let statDate = stat.substr(8, 2)
+            console.log(statDate)
+        }
+
+
     }
+
 
     return (
         <>

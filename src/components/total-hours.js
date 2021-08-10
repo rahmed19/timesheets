@@ -35,6 +35,7 @@ export default function TotalHours({ triggerChange }) {
                 aria-label="Total hours worked"
                 type="text"
                 value={totalWeeklyHours}
+                disabled="true"
             />
 
         </>

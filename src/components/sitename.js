@@ -6,7 +6,7 @@ import { useContext, useState, useEffect } from 'react'
 export default function Sitename({ index }) {
     const initialOption = '--Select your site'
 
-    const { firebase } = useContext(FirebaseContext)
+    const { firebase, FieldValue } = useContext(FirebaseContext)
     const [docs, setDocs] = useState([])
     //const [optionValue, setOptionValue] = useState(initialOption)
 
@@ -26,6 +26,7 @@ export default function Sitename({ index }) {
 
         return fetchData()
     }, [])
+
 
 
     return (

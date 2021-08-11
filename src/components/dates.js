@@ -15,13 +15,14 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 
     const [datesArray, setDatesArray] = useState([])
     const [statHolidays, setStatHolidays] = useState([])
+    const [isStat, setIsStat] = useState(null)
 
     function displayFirstTwoWeeks() {
         let newArray = []
         for (let i = 1; i <= 15; i++) {
             //add and format day of the week, date, month and year
             newArray.push(`${format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'EEE')} ${formattedMonth} ${i}, ${formattedYear}`)
-
+            console.log(newArray)
         }
 
         setDatesArray(newArray)
@@ -44,32 +45,43 @@ export default function Dates({ triggerChange, setTriggerChange }) {
         } else {
             displaySecondTwoWeeks()
         }
+        //get info on stat holidays
+        // fetch('https://canada-holidays.ca/api/v1/provinces/BC')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         setStatHolidays(data.province.holidays)
+        //     })
+        // console.log('stat holidays' + statHolidays)
     }, [])
 
-    //get info on stat holidays
-    async function handleHolidays() {
-        await fetch('https://canada-holidays.ca/api/v1/provinces/BC')
-            .then(response => response.json())
-            .then(data => {
-                setStatHolidays(data.province.holidays)
-            })
-        await console.log('date ' + currentDate)
-        await console.log('month ' + currentMonth)
-        await console.log('year ' + currentYear)
-        await console.log('days in the month ' + daysInMonth)
-        if (statHolidays[2] !== undefined) {
-            console.log(statHolidays[2].date)
-            let stat = statHolidays[2].date
-            let statYear = stat.substr(0, 4)
-            console.log(statYear)
-            let statMonth = stat.substr(5, 2)
-            console.log(statMonth)
-            let statDate = stat.substr(8, 2)
-            console.log(statDate)
-        }
 
+    // function handleHolidays() {
+    //     for (let i = 1; i < 15; i++) {
+    //         let yearCheck = format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'yyyy')
+    //         console.log(yearCheck)
+    //         let monthCheck = format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'MM')
+    //         console.log(monthCheck)
+    //         let dateCheck = format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'dd')
+    //         console.log(dateCheck)
+    //         if (statHolidays !== undefined) {
+    //             for (let a = 0; a < statHolidays.length; a++) {
+    //                 let stat = statHolidays[a].date
+    //                 let statYear = stat.substr(0, 4)
+    //                 console.log(statYear)
+    //                 let statMonth = stat.substr(5, 2)
+    //                 console.log(statMonth)
+    //                 let statDate = stat.substr(8, 2)
+    //                 console.log(statDate)
 
-    }
+    //                 if (yearCheck === statYear && monthCheck === statMonth && dateCheck === statDate) {
+    //                     setIsStat(true)
+    //                     console.log(isStat)
+
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 
     return (
@@ -86,7 +98,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
                 )
             })}</p>
             <TotalHours triggerChange={triggerChange} />
-            <button onClick={handleHolidays}>Fetch Holidays</button>
+            {/* <button onClick={handleHolidays}>Fetch Holidays</button> */}
         </>
     )
 }

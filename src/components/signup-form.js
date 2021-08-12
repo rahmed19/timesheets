@@ -1,6 +1,5 @@
 import { set } from 'date-fns'
 import React, { useRef, useState, useContext, useEffect } from 'react'
-import UseAuthListener from '../context/use-auth-listener'
 import FirebaseContext from '../context/firebase'
 
 export default function SignupForm() {
@@ -10,14 +9,9 @@ export default function SignupForm() {
     const passwordConfirmRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { auth } = useContext(FirebaseContext)
 
 
-    const { signup } = UseAuthListener
 
-    // function signup(email, password) {
-    //     return auth.createUserWithEmailAndPassword(email, password)
-    // }
 
     async function handleSubmit(e) {
         e.preventDefault()

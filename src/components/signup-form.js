@@ -14,7 +14,8 @@ export default function SignupForm() {
                 Email address:<input type="email" ref={emailRef} required /><br />
                 Password: <input type="password" ref={passwordRef} required /><br />
                 Confirm Password: <input type="password" ref={passwordConfirmRef} required /><br />
-                <button type="submit" >Sign up</button>
+                <button type="submit" >Sign up</button> <br />
+                Already have an account? Log in.
             </form>
 
         </>

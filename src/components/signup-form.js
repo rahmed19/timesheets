@@ -1,7 +1,6 @@
-import { set } from 'date-fns'
 import React, { useRef, useState, useContext, useEffect } from 'react'
-import FirebaseContext from '../context/firebase'
 import { useAuth } from '../context/auth-context'
+import { Link } from 'react-router-dom'
 
 export default function SignupForm() {
 
@@ -10,7 +9,7 @@ export default function SignupForm() {
     const passwordConfirmRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { signup, currentUser } = useAuth()
+    const { signup } = useAuth()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -40,7 +39,7 @@ export default function SignupForm() {
                 Password: <input type="password" ref={passwordRef} required /><br />
                 Confirm Password: <input type="password" ref={passwordConfirmRef} required /><br />
                 <button type="submit" disabled={loading}>Sign up</button> <br />
-                Already have an account? Log in.
+                Already have an account? <Link to="/login">Log In</Link>
             </form>
 
 

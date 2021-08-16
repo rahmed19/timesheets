@@ -42,7 +42,7 @@ export default function SignupForm() {
                 <button type="submit" disabled={loading}>Sign up</button> <br />
                 Already have an account? Log in.
             </form>
-            {currentUser && JSON.stringify(currentUser.email)}
+
 
         </>
     )

@@ -10,7 +10,7 @@ export default function SignupForm() {
     const passwordConfirmRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { signup } = useAuth()
+    const { signup, currentUser } = useAuth()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -42,6 +42,7 @@ export default function SignupForm() {
                 <button type="submit" disabled={loading}>Sign up</button> <br />
                 Already have an account? Log in.
             </form>
+            {currentUser && JSON.stringify(currentUser.email)}
 
         </>
     )

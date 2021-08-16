@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const listener = auth.onAuthStateChanged(user => {
-            setCurrentUser(JSON.stringify(user))
+            setCurrentUser(user)
         })
 
         return listener

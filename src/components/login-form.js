@@ -1,6 +1,6 @@
 import React, { useRef, useState, useContext, useEffect } from 'react'
 import { useAuth } from '../context/auth-context'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 export default function LoginForm() {
 
@@ -8,7 +8,9 @@ export default function LoginForm() {
     const passwordRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { signup } = useAuth()
+    const { login } = useAuth()
+    const history = useHistory()
+
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -16,7 +18,8 @@ export default function LoginForm() {
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
+            await login(emailRef.current.value, passwordRef.current.value)
+            history.push("/")
         } catch (error) {
             setError(error.message)
         }

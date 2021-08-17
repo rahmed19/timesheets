@@ -120,7 +120,7 @@ export default function GrabContents() {
                     totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
                 }, 10);
             }
-            console.log(currentUser.uid)
+            console.log(currentUser.displayName)
         }
         return fetchData()
 

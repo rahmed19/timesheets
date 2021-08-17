@@ -15,7 +15,8 @@ export function AuthProvider({ children }) {
     async function signup(email, password, firstName, lastName) {
         return await auth.createUserWithEmailAndPassword(email, password).then((result) => {
             result.user.updateProfile({
-                displayName: firstName,
+                displayName: `${firstName} ${lastName}`
+
             })
         })
 

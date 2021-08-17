@@ -4,6 +4,7 @@ import './App.css';
 import Timesheets from './pages/timesheets';
 import Signup from './pages/signup';
 import Login from './pages/login';
+import PrivateRoute from './hooks/private-route';
 import { AuthProvider } from './context/auth-context'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -13,7 +14,7 @@ function App() {
       <Router>
         <AuthProvider>
           <Switch >
-            <Route exact path="/" component={Timesheets} />
+            <PrivateRoute exact path="/" component={Timesheets} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
 

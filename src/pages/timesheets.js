@@ -14,8 +14,8 @@ function Timesheets() {
                     <Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
 
                     <GrabContents />
-                </form>
 
+                </form>
 
             </div>
         </>

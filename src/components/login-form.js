@@ -37,7 +37,7 @@ export default function LoginForm() {
                 Email address:<input type="email" ref={emailRef} required /><br />
                 Password: <input type="password" ref={passwordRef} required /><br />
                 <button type="submit" disabled={loading}>Log In</button> <br />
-                <Link to="/forgot-password">Forgot Password?</Link>
+                <Link to="/forgot-password">Forgot Password?</Link><br />
                 Don't have an account? <Link to="/signup">Sign up</Link>
             </form>
 

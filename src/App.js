@@ -17,6 +17,7 @@ function App() {
             <PrivateRoute exact path="/" component={Timesheets} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
 
           </Switch>
 

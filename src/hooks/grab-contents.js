@@ -1,10 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react'
 import FirebaseContext from '../context/firebase'
+import { useAuth } from '../context/auth-context';
 import { getDaysInMonth, getDate, getMonth, getYear } from 'date-fns'
 
 export default function GrabContents() {
 
     const { firebase } = useContext(FirebaseContext)
+
+    const { currentUser } = useAuth()
 
     const currentDate = getDate(Date.now())
     const currentMonth = getMonth(Date.now())
@@ -65,7 +68,7 @@ export default function GrabContents() {
         let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
         allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
 
-        await firebase.firestore().collection('0002').doc(`${datesFilter}`).set({
+        await firebase.firestore().collection(`${currentUser.uid}`).doc(`${datesFilter}`).set({
             datesFilter: datesFilter,
             employeeId: "0002",
             name: "",
@@ -86,7 +89,7 @@ export default function GrabContents() {
     useEffect(() => {
         const fetchData = async () => {
 
-            const collectionRef = firebase.firestore().collection('0002').doc(`${datesFilter}`)
+            const collectionRef = firebase.firestore().collection(`${currentUser.uid}`).doc(`${datesFilter}`)
             const doc = await collectionRef.get()
             if (!doc.exists) {
                 console.log('no such document')
@@ -117,7 +120,7 @@ export default function GrabContents() {
                     totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
                 }, 10);
             }
-
+            console.log(currentUser.uid)
         }
         return fetchData()
 

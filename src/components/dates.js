@@ -14,8 +14,8 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 
 
     const [datesArray, setDatesArray] = useState([])
-    const [statHolidays, setStatHolidays] = useState([])
-    const [isStat, setIsStat] = useState(null)
+    // const [statHolidays, setStatHolidays] = useState([])
+    // const [isStat, setIsStat] = useState(null)
 
     function displayFirstTwoWeeks() {
         let newArray = []

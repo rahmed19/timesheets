@@ -7,6 +7,8 @@ export default function SignupForm() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
+    const firstNameRef = useRef()
+    const lastNameRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const { signup } = useAuth()
@@ -21,7 +23,10 @@ export default function SignupForm() {
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
+            await signup(emailRef.current.value,
+                passwordRef.current.value,
+                firstNameRef.current.value,
+                lastNameRef.current.value)
             history.push("/")
         } catch (error) {
             setError(error.message)
@@ -40,6 +45,8 @@ export default function SignupForm() {
                 Email address:<input type="email" ref={emailRef} required /><br />
                 Password: <input type="password" ref={passwordRef} required /><br />
                 Confirm Password: <input type="password" ref={passwordConfirmRef} required /><br />
+                First Name: <input ref={firstNameRef} required /><br />
+                Last Name: <input ref={lastNameRef} required /><br />
                 <button type="submit" disabled={loading}>Sign up</button> <br />
                 Already have an account? <Link to="/login">Log In</Link>
             </form>

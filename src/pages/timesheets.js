@@ -9,12 +9,12 @@ function Timesheets() {
 
     const [triggerChange, setTriggerChange] = useState(false)
     const { logout, currentUser } = useAuth()
-    console.log(currentUser)
 
     return (
         <>
             <div className="App">
                 <h1>True Canadian Security Corp. Timesheets </h1>
+                <p>Hello, {currentUser.displayName}</p>
                 <form className="timesheet">
                     <Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
 

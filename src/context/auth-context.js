@@ -44,8 +44,20 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
+        // const listener = auth.onAuthStateChanged(user => {
+        //     setCurrentUser(user)
+        //     setLoading(false)
+
+        // })
         const listener = auth.onAuthStateChanged(user => {
-            setCurrentUser(user)
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user))
+                setCurrentUser(user)
+            } else {
+                localStorage.removeItem('user')
+                setCurrentUser(null)
+            }
+
             setLoading(false)
 
         })

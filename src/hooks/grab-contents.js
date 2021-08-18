@@ -70,7 +70,7 @@ export default function GrabContents() {
 
         await firebase.firestore().collection(`${currentUser.uid}`).doc(`${datesFilter}`).set({
             datesFilter: datesFilter,
-            employeeId: "0002",
+            employeeId: currentUser.uid,
             name: "",
             actualDates: "",
             formattedDates: allDatesArray,

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useContext, useEffect } from 'react'
 import { useAuth } from '../context/auth-context'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, Redirect } from 'react-router-dom'
 
 export default function SignupForm() {
 
@@ -11,7 +11,7 @@ export default function SignupForm() {
     const lastNameRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { signup } = useAuth()
+    const { signup, currentUser } = useAuth()
     const history = useHistory()
 
     async function handleSubmit(e) {
@@ -33,25 +33,34 @@ export default function SignupForm() {
         }
         setLoading(false)
     }
+    //check to see if logged in
+    if (!currentUser) {
+        return (
+            <>
+                Sign up.<br />
+                {error}<br />
+
+                <form onSubmit={handleSubmit}>
+                    Email address:<input type="email" ref={emailRef} required /><br />
+                    Password: <input type="password" ref={passwordRef} required /><br />
+                    Confirm Password: <input type="password" ref={passwordConfirmRef} required /><br />
+                    First Name: <input ref={firstNameRef} required /><br />
+                    Last Name: <input ref={lastNameRef} required /><br />
+                    <button type="submit" disabled={loading}>Sign up</button> <br />
+                    Already have an account? <Link to="/login">Log In</Link>
+                </form>
 
 
-    return (
-        <>
-            Sign up.<br />
-            {error}<br />
-            {/* Current User: {user} */}
+            </>
+        )
+    }
+    // if not logged in then redirect to login page
+    else if (currentUser) {
+        return (
+            <>
+                <Redirect to="/" />
+            </>
+        )
+    }
 
-            <form onSubmit={handleSubmit}>
-                Email address:<input type="email" ref={emailRef} required /><br />
-                Password: <input type="password" ref={passwordRef} required /><br />
-                Confirm Password: <input type="password" ref={passwordConfirmRef} required /><br />
-                First Name: <input ref={firstNameRef} required /><br />
-                Last Name: <input ref={lastNameRef} required /><br />
-                <button type="submit" disabled={loading}>Sign up</button> <br />
-                Already have an account? <Link to="/login">Log In</Link>
-            </form>
-
-
-        </>
-    )
 }

@@ -26,10 +26,6 @@ export default function LoginForm() {
         setLoading(false)
     }
 
-    function handleRedirect() {
-        history.push("/")
-    }
-
     //check to see if logged in
     if (!currentUser) {
         return (

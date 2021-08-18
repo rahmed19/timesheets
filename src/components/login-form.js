@@ -1,6 +1,6 @@
-import React, { useRef, useState, useContext, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { useAuth } from '../context/auth-context'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, Redirect } from 'react-router-dom'
 
 export default function LoginForm() {
 
@@ -8,7 +8,7 @@ export default function LoginForm() {
     const passwordRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { login } = useAuth()
+    const { login, currentUser } = useAuth()
     const history = useHistory()
 
 
@@ -26,22 +26,36 @@ export default function LoginForm() {
         setLoading(false)
     }
 
+    function handleRedirect() {
+        history.push("/")
+    }
 
-    return (
-        <>
-            Log In.<br />
-            {error}<br />
-
-
-            <form onSubmit={handleSubmit}>
-                Email address:<input type="email" ref={emailRef} required /><br />
-                Password: <input type="password" ref={passwordRef} required /><br />
-                <button type="submit" disabled={loading}>Log In</button> <br />
-                <Link to="/forgot-password">Forgot Password?</Link><br />
-                Don't have an account? <Link to="/signup">Sign up</Link>
-            </form>
+    //check to see if logged in
+    if (!currentUser) {
+        return (
+            <>
+                Log In.<br />
+                {error}<br />
 
 
-        </>
-    )
+                <form onSubmit={handleSubmit}>
+                    Email address:<input type="email" ref={emailRef} required /><br />
+                    Password: <input type="password" ref={passwordRef} required /><br />
+                    <button type="submit" disabled={loading}>Log In</button> <br />
+                    <Link to="/forgot-password">Forgot Password?</Link><br />
+                    Don't have an account? <Link to="/signup">Sign up</Link>
+                </form>
+
+
+            </>
+        )
+        // if not logged in then redirect to login page
+    } else if (currentUser) {
+        return (
+            <>
+                <Redirect to="/" />
+            </>
+        )
+    }
+
 }

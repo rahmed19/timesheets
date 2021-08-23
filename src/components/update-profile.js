@@ -6,10 +6,11 @@ export default function UpdateProfile() {
 
     const emailRef = useRef()
     const passwordRef = useRef()
+    const displayNameRef = useRef()
     const passwordConfirmRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { updateEmail, updatePassword, currentUser } = useAuth()
+    const { updateEmail, updatePassword, currentUser, updateDisplayName } = useAuth()
     const history = useHistory()
 
     function handleSubmit(e) {
@@ -26,9 +27,15 @@ export default function UpdateProfile() {
             promises.push(updateEmail(emailRef.current.value))
         }
 
+        if (displayNameRef.current.value !== currentUser.displayName) {
+            promises.push(updateDisplayName(displayNameRef.current.value))
+        }
+
         if (passwordRef.current.value) {
             promises.push(updatePassword(passwordRef.current.value))
         }
+
+
 
         Promise.all(promises).then(() => {
             history.push('/')
@@ -49,6 +56,7 @@ export default function UpdateProfile() {
 
             <form onSubmit={handleSubmit}>
                 Email address:<input type="email" ref={emailRef} defaultValue={currentUser.email} required /><br />
+                Display Name:<input type="text" ref={displayNameRef} defaultValue={currentUser.displayName} required /><br />
                 Password: <input type="password" ref={passwordRef}
                     placeholder="Leave blank to keep the same" /><br />
                 Confirm Password: <input type="password" ref={passwordConfirmRef}

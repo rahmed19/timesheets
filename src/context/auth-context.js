@@ -43,6 +43,13 @@ export function AuthProvider({ children }) {
         return currentUser.updatePassword(password)
     }
 
+    function updateDisplayName(displayName) {
+        return currentUser.updateProfile({
+            displayName: displayName
+
+        })
+    }
+
     useEffect(() => {
         // const listener = auth.onAuthStateChanged(user => {
         //     setCurrentUser(user)
@@ -72,6 +79,7 @@ export function AuthProvider({ children }) {
         logout,
         resetPassword,
         updateEmail,
+        updateDisplayName,
         updatePassword
     }
 

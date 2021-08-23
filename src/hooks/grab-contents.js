@@ -68,10 +68,10 @@ export default function GrabContents() {
         let totalWeeklyHoursContents = document.getElementById('totalWeeklyHours')
         allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
 
-        await firebase.firestore().collection(`${currentUser.uid}`).doc(`${datesFilter}`).set({
+        await firebase.firestore().collection(`${currentUser.uid.slice(0, 4).toUpperCase()}`).doc(`${datesFilter}`).set({
             datesFilter: datesFilter,
-            employeeId: currentUser.uid,
-            name: "",
+            employeeId: currentUser.uid.slice(0, 4).toUpperCase(),
+            name: currentUser.displayName,
             actualDates: "",
             formattedDates: allDatesArray,
             siteName: allSitenamesArray,

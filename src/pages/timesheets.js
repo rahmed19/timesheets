@@ -15,6 +15,7 @@ function Timesheets() {
             <div className="App">
                 <h1>True Canadian Security Corp. Timesheets </h1>
                 <p>Hello, {currentUser.displayName}</p>
+                <p>Employee ID: {(currentUser.uid.slice(0, 4).toUpperCase())}</p>
                 <Link to="/update-profile">Update Profile</Link>
                 <form className="timesheet">
                     <Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />

@@ -55,6 +55,7 @@ export default function UpdateProfile() {
             {error}<br />
 
             <form onSubmit={handleSubmit}>
+                Employee Number: {currentUser.uid.slice(0, 4).toUpperCase()}<br />
                 Email address:<input type="email" ref={emailRef} defaultValue={currentUser.email} required /><br />
                 Display Name:<input type="text" ref={displayNameRef} defaultValue={currentUser.displayName} required /><br />
                 Password: <input type="password" ref={passwordRef}

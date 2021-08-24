@@ -8,7 +8,6 @@ export default function Sitename({ index }) {
 
     const { firebase, auth } = useContext(FirebaseContext)
     const [docs, setDocs] = useState([])
-    //const [optionValue, setOptionValue] = useState(initialOption)
 
     useEffect(() => {
 

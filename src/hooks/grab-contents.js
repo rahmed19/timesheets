@@ -16,6 +16,17 @@ export default function GrabContents() {
 
     let allTotalWeeklyHours = 0
 
+    //depending on number of days in the month, set counter
+    let dateCounter = 0
+    if (daysInMonth === 30) {
+        dateCounter = 15
+    }
+    if (daysInMonth === 31) {
+        dateCounter = 16
+    }
+    console.log(dateCounter)
+
+
 
     //setup firebase subcollection name based on what week it is plus adding month and year to get a unique collection ID
     let datesFilter = 0
@@ -42,7 +53,7 @@ export default function GrabContents() {
 
 
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < dateCounter; i++) {
             //formatted dates
             let dateContents = document.getElementById(`date-${i}`)
             dateContents && allDatesArray.push(dateContents.innerText)
@@ -96,7 +107,7 @@ export default function GrabContents() {
             } else {
                 console.log(doc.data())
                 setTimeout(() => {
-                    for (let i = 0; i < 15; i++) {
+                    for (let i = 0; i < dateCounter; i++) {
 
                         //sitename
 

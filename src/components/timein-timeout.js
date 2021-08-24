@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 
 function TimeinTimeout({
@@ -10,34 +10,6 @@ function TimeinTimeout({
 
 
 
-    // const [timeIn, setTimeIn] = useState('')
-    // const [timeOut, setTimeOut] = useState('')
-    // const [hoursWorked, setHoursWorked] = useState(0)
-
-
-    // function handleTimeInChange(e) {
-    //     if ((/[a-zA-Z]/).test(e.target.value) === false) {
-    //         // setTimeIn(e.target.value)
-    //     }
-
-    // }
-
-    // function handleTimeOutChange(e) {
-    //     if ((/[a-zA-Z]/).test(e.target.value) === false) {
-    //         //  setTimeOut(e.target.value)
-    //     }
-
-    // }
-
-    // function handleTotalTimeChange(e) {
-
-    //     // if ((/[a-zA-Z]/).test(e.target.value) === false) {
-
-    //     //     setHoursWorked(e.target.value)
-    //     // }
-    //     setTriggerChange(!triggerChange)
-    // }
-
     return (
         <>
             <input
@@ -45,16 +17,14 @@ function TimeinTimeout({
                 aria-label="Enter your time in"
                 type="text"
                 maxLength="4"
-            //   onChange={handleTimeInChange}
-            // value={timeIn}
+
             />
             <input
                 id={`signOut-${index}`}
                 aria-label="Enter your time out"
                 type="text"
                 maxLength="4"
-            // onChange={handleTimeOutChange}
-            // value={timeOut}
+
             />
             <input
                 //index number to appropriate scalable input ID
@@ -63,7 +33,7 @@ function TimeinTimeout({
                 type="number"
                 max="24"
                 onChange={() => setTriggerChange(!triggerChange)}
-            // value={hoursWorked === 0 ? '' : hoursWorked}
+
             />
         </>
     )

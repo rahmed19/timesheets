@@ -89,7 +89,7 @@ export default function GrabContents() {
     useEffect(() => {
         const fetchData = async () => {
 
-            const collectionRef = firebase.firestore().collection(`${currentUser.uid}`).doc(`${datesFilter}`)
+            const collectionRef = firebase.firestore().collection(`${currentUser.uid.slice(0, 4).toUpperCase()}`).doc(`${datesFilter}`)
             const doc = await collectionRef.get()
             if (!doc.exists) {
                 console.log('no such document')

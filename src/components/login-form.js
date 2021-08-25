@@ -31,6 +31,7 @@ export default function LoginForm() {
     if (!currentUser) {
         return (
             <>
+            <div className="flex h-screen justify-center items-top bg-gray-100">
                 Log In.<br />
                 {error}<br />
 
@@ -42,7 +43,7 @@ export default function LoginForm() {
                     <Link to="/forgot-password">Forgot Password?</Link><br />
                     Don't have an account? <Link to="/signup">Sign up</Link>
                 </form>
-
+    </div>
 
             </>
         )

@@ -1,4 +1,4 @@
-import React, { useRef, useState, forwardRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useAuth } from '../context/auth-context'
 import { Link, useHistory, Redirect } from 'react-router-dom'
 import TailwindInput from './tailwind/tailwindInput'
@@ -37,9 +37,7 @@ export default function LoginForm() {
 
                 <form onSubmit={handleSubmit}>
                     Test Input: <TailwindInput type="email" ref={emailRef} /><br />
-                    {/* Email address:<input
-                        type="email" ref={emailRef} required /><br /> */}
-                    Password: <input type="password" ref={passwordRef} required /><br />
+                        Password: <TailwindInput type="password" ref={passwordRef} /> <br />
                     <button type="submit" disabled={loading}>Log In</button> <br />
                     <Link to="/forgot-password">Forgot Password?</Link><br />
                     Don't have an account? <Link to="/signup">Sign up</Link>

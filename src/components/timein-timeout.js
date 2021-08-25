@@ -28,6 +28,7 @@ function TimeinTimeout({
             />
             <input
                 //index number to appropriate scalable input ID
+                className="bg-blue-500 text-white font-medium mx-4 my-4 rounded"
                 id={`hoursWorked-${index}`}
                 aria-label="Enter your total time worked"
                 type="number"

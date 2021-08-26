@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link } from "react-router-dom"
 
-export default function ForgotPassword() {
+export default function ForgotPasswordForm() {
 	const emailRef = useRef()
 	const [error, setError] = useState("")
 	const [message, setMessage] = useState("")

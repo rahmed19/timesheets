@@ -32,7 +32,7 @@ export default function LoginForm() {
         return (
             <>
             <div className="flex h-screen justify-center items-top bg-gray-100">
-                Log In.<br />
+                <div>Log In.<br /></div>
                 {error}<br />
 
 

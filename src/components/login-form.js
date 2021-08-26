@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../context/auth-context'
 import { Link, useHistory, Redirect } from 'react-router-dom'
-import TailwindInput from './tailwind/tailwindInput'
+import TailwindInput from '../hooks/tailwind/tailwindInput'
 
 export default function LoginForm() {
 

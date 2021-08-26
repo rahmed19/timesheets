@@ -1,10 +1,13 @@
-import React from 'react'
-import SignupForm from '../components/signup-form'
+import React from "react"
+import Layout from "../components/sections/layout"
+import SignupForm from "../components/signup-form"
 
 export default function Signup() {
-    return (
-        <>
-            <SignupForm />
-        </>
-    )
+	return (
+		<>
+			<Layout>
+				<SignupForm />
+			</Layout>
+		</>
+	)
 }

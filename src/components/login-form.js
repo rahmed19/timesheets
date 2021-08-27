@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link, useHistory, Redirect } from "react-router-dom"
-import TailwindInput from "../hooks/tailwind/tailwindInput"
 
 export default function LoginForm() {
 	const emailRef = useRef()
@@ -29,25 +28,71 @@ export default function LoginForm() {
 	if (!currentUser) {
 		return (
 			<>
-				<div>
-					Log In.
-					<br />
+				<div className='flex flex-wrap items-center justify-between'>
+					<div></div>
+					<div className='w-full max-w-xs content-center'>
+						<br />
+						<form
+							className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+							onSubmit={handleSubmit}
+						>
+							<div className='mb-4'>
+								<label className='block text-gray-700 text-sm font-bold mb-2' for='email'>
+									Email
+								</label>
+								<input
+									id='email'
+									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+									type='email'
+									placeholder='Email'
+									ref={emailRef}
+								/>
+							</div>
+							<p className='text-red-500 text-md mb-3 bold'>{error}</p>{" "}
+							<div class='mb-6'>
+								<label class='block text-gray-700 text-sm font-bold mb-2' for='password'>
+									Password
+								</label>
+								<input
+									class='shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+									id='password'
+									type='password'
+									placeholder='******************'
+									ref={passwordRef}
+								/>
+								<p class='text-red-500 text-xs italic'>Please enter your password.</p>
+							</div>
+							<br />
+							<div class='flex items-center justify-between'>
+								<button
+									className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+									type='submit'
+									disabled={loading}
+								>
+									Sign In
+								</button>{" "}
+								<br />
+								<Link
+									to='/forgot-password'
+									className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
+								>
+									Forgot Password?
+								</Link>
+								<br />
+							</div>
+						</form>
+						<p className='text-center text-gray-500 text-md'>
+							Don't have an account?{" "}
+							<Link
+								className='font-bold text-md text-blue-500 hover:text-blue-800'
+								to='/signup'
+							>
+								Sign up
+							</Link>
+						</p>
+					</div>
+					<div></div>
 				</div>
-				{error}
-				<br />
-
-				<form onSubmit={handleSubmit}>
-					Test Input: <TailwindInput type='email' ref={emailRef} />
-					<br />
-					Password: <TailwindInput type='password' ref={passwordRef} /> <br />
-					<button type='submit' disabled={loading}>
-						Log In
-					</button>{" "}
-					<br />
-					<Link to='/forgot-password'>Forgot Password?</Link>
-					<br />
-					Don't have an account? <Link to='/signup'>Sign up</Link>
-				</form>
 			</>
 		)
 		// if not logged in then redirect to login page

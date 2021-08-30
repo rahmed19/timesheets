@@ -9,6 +9,7 @@ const TailwindInput = forwardRef((props, ref) => {
 			id={props.id}
 			placeholder={props.placeholder}
 			required={props.required}
+			defaultValue={props.defaultValue}
 		></input>
 	)
 })

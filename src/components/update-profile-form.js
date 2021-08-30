@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link, useHistory } from "react-router-dom"
+import TailwindInput from "../hooks/tailwind/tailwindInput"
 
 export default function UpdateProfileForm() {
 	const emailRef = useRef()
@@ -59,20 +60,17 @@ export default function UpdateProfileForm() {
 						className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
 					>
 						<p className='text-red-500 text-md mb-3 bold'>{error}</p>
-						{/* <label className='block text-gray-700 text-sm font-bold mb-2'>
-							Employee Number: {currentUser.uid.slice(0, 4).toUpperCase()}
-						</label> */}
+
 						<div className='mb-4'>
 							<label className='block text-gray-700 text-sm font-bold mb-2' for='email'>
 								Email
 							</label>
-							<input
+							<TailwindInput
 								id='email'
-								className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 								type='email'
 								ref={emailRef}
 								defaultValue={currentUser.email}
-								required
+								required='required'
 							/>
 						</div>
 						<div className='mb-4'>
@@ -82,9 +80,8 @@ export default function UpdateProfileForm() {
 							>
 								Display Name
 							</label>
-							<input
+							<TailwindInput
 								id='display-name'
-								className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 								type='text'
 								ref={displayNameRef}
 								defaultValue={currentUser.displayName}
@@ -98,13 +95,19 @@ export default function UpdateProfileForm() {
 							>
 								Password
 							</label>
-							<input
+							<TailwindInput
+								id='password'
+								type='password'
+								ref={passwordRef}
+								placeholder='Leave blank to keep the same'
+							/>
+							{/* <input
 								id='password'
 								className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 								type='password'
 								ref={passwordRef}
 								placeholder='Leave blank to keep the same'
-							/>
+							/> */}
 						</div>
 						<div className='mb-4'>
 							<label
@@ -113,9 +116,8 @@ export default function UpdateProfileForm() {
 							>
 								Confirm Password
 							</label>
-							<input
+							<TailwindInput
 								id='confirm-password'
-								className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 								type='password'
 								ref={passwordConfirmRef}
 								placeholder='Leave blank to keep the same'

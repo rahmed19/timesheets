@@ -55,13 +55,7 @@ export default function SignupForm() {
 								<label className='block text-gray-700 text-sm font-bold mb-2' for='email'>
 									Email
 								</label>
-								<input
-									id='email'
-									type='email'
-									ref={emailRef}
-									required
-									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-								/>
+								<TailwindInput id='email' type='email' ref={emailRef} required />
 							</div>
 							<div className='mb-4'>
 								<label
@@ -70,13 +64,12 @@ export default function SignupForm() {
 								>
 									Password
 								</label>
-								<input
+								<TailwindInput
 									placeholder='******************'
 									id='password'
 									type='password'
 									ref={passwordRef}
-									required
-									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+									required='requried'
 								/>
 							</div>
 							<div className='mb-4'>
@@ -86,13 +79,12 @@ export default function SignupForm() {
 								>
 									Confirm Password
 								</label>
-								<input
+								<TailwindInput
 									placeholder='******************'
 									id='confirm-password'
 									type='password'
 									ref={passwordConfirmRef}
-									required
-									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+									required='required'
 								/>
 							</div>
 							<div className='mb-4'>
@@ -102,26 +94,16 @@ export default function SignupForm() {
 								>
 									First Name
 								</label>
-								<input
-									id='first-name'
-									ref={firstNameRef}
-									required
-									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-								/>
+								<TailwindInput id='first-name' ref={firstNameRef} required='required' />
 							</div>
 							<div className='mb-4'>
 								<label
 									className='block text-gray-700 text-sm font-bold mb-2'
 									for='last-name'
 								>
-									First Name
+									Last Name
 								</label>
-								<input
-									id='last-name'
-									ref={lastNameRef}
-									required
-									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-								/>
+								<TailwindInput id='first-name' ref={lastNameRef} required='required' />
 							</div>
 							<div className='flex flex-wrap items-center justify-between'>
 								<div></div>

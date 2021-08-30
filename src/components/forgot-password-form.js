@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link } from "react-router-dom"
+import TailwindInput from "../hooks/tailwind/tailwindInput"
 
 export default function ForgotPasswordForm() {
 	const emailRef = useRef()
@@ -42,13 +43,7 @@ export default function ForgotPasswordForm() {
 							<label className='block text-gray-700 text-sm font-bold mb-2' for='email'>
 								Enter your email address
 							</label>
-							<input
-								id='email'
-								type='email'
-								ref={emailRef}
-								required
-								className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-							/>
+							<TailwindInput id='email' type='email' ref={emailRef} required />
 						</div>
 						<div className='flex flex-wrap items-center justify-between'>
 							<div></div>

@@ -43,6 +43,9 @@ export default function SignupForm() {
 					<div></div>
 
 					<div className='w-full max-w-sm content-center'>
+						<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-2 text-black-800'>
+							Sign Up For An Account
+						</h4>
 						<form
 							onSubmit={handleSubmit}
 							className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
@@ -135,7 +138,7 @@ export default function SignupForm() {
 							</div>
 						</form>
 						<p className='text-center text-gray-500 text-md'>
-							Already have an account? &nbsp;
+							Already have an account?&nbsp;
 							<Link
 								className='font-bold text-md text-blue-500 hover:text-blue-800'
 								to='/login'

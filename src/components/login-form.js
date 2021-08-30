@@ -60,7 +60,7 @@ export default function LoginForm() {
 									placeholder='******************'
 									ref={passwordRef}
 								/>
-								<p class='text-red-500 text-xs italic'>Please enter your password.</p>
+								<p class='text-500 text-sm italic'>Please enter your password</p>
 							</div>
 							<br />
 							<div class='flex items-center justify-between'>

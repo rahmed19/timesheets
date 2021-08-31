@@ -94,14 +94,14 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 		<>
 			<div className='flex flex-wrap items-center justify-between'>
 				<div></div>
-				<div className='w-full max-w-2xl content-center'>
+				<div className='w-full max-w-3xl content-center'>
 					{datesArray &&
 						datesArray.map((date, index) => {
 							return (
 								<>
 									<div className='grid grid-cols-3'>
 										<div id={`date-${index}`}>{date}</div>
-										<div>
+										<div className='px-2'>
 											<Sitename index={index} />
 										</div>
 										<div>

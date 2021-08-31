@@ -43,18 +43,18 @@ export default function Navbar() {
 							Sign Up
 						</Link>
 					)}
-
 					{currentUser && (
 						<Link className='p-4' to='/update-profile'>
 							Update Profile
 						</Link>
 					)}
-
 					{currentUser && (
 						<Link to='/login' onClick={() => logout()}>
 							Log Out
 						</Link>
 					)}
+					{currentUser && <p>Hello, {currentUser.displayName}</p>}
+					{currentUser && <p>Employee ID: {currentUser.uid.slice(0, 4).toUpperCase()}</p>}
 				</div>
 			</nav>
 		</>

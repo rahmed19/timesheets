@@ -11,13 +11,13 @@ function TimeinTimeout({
 		<>
 			<div className='mb-4'>
 				<div className='grid grid-cols-3'>
-					<div>
+					<div className='px-2'>
 						<TailwindInput id={`signIn-${index}`} type='text' maxLength='4' />
 					</div>
-					<div>
+					<div className='px-2'>
 						<TailwindInput id={`signOut-${index}`} type='text' maxLength='4' />
 					</div>
-					<div>
+					<div className='px-2'>
 						<TailwindInput
 							//index number to appropriate scalable input ID
 

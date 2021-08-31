@@ -10,6 +10,9 @@ const TailwindInput = forwardRef((props, ref) => {
 			placeholder={props.placeholder}
 			required={props.required}
 			defaultValue={props.defaultValue}
+			maxLength={props.maxLength}
+			onChange={props.onChange}
+			value={props.value}
 		></input>
 	)
 })

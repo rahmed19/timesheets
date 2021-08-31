@@ -94,13 +94,20 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 		<>
 			<div className='flex flex-wrap items-center justify-between'>
 				<div></div>
-				<div className='w-full max-w-3xl content-center'>
+				<div className='w-full max-w-2xl content-center'>
+					<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-4 text-black-800'>
+						Submit Your Timesheet
+					</h4>
 					{datesArray &&
 						datesArray.map((date, index) => {
 							return (
 								<>
 									<div className='grid grid-cols-3'>
-										<div id={`date-${index}`}>{date}</div>
+										<div id={`date-${index}`}>
+											<p className='text-center font-semibold shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'>
+												{date}
+											</p>
+										</div>
 										<div className='px-2'>
 											<Sitename index={index} />
 										</div>

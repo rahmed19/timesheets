@@ -3,7 +3,7 @@ import React, { forwardRef } from "react"
 const TailwindInput = forwardRef((props, ref) => {
 	return (
 		<input
-			className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
+			className='text-center font-semibold shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 			type={props.type}
 			ref={ref}
 			id={props.id}

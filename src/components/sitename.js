@@ -31,7 +31,7 @@ export default function Sitename({ index }) {
 			<select
 				id={`sitename-${index}`}
 				// 	className='block w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-				className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
+				className='text-center font-semibold shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 			>
 				<option>{initialOption}</option>
 				<option></option>

@@ -27,7 +27,7 @@ export default function TotalHours({ triggerChange }) {
 
 	return (
 		<>
-			Total Hours Worked:{" "}
+			<h4 className='text-red-600 font-semibold'>Total Hours Worked: </h4>
 			<TailwindInput
 				id='totalWeeklyHours'
 				aria-label='Total hours worked'

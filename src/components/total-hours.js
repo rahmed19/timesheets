@@ -30,10 +30,10 @@ export default function TotalHours({ triggerChange }) {
 			<h4 className='text-center text-red-600 font-semibold'>Total Hours Worked </h4>
 			<TailwindInput
 				id='totalWeeklyHours'
-				aria-label='Total hours worked'
 				type='text'
 				value={totalWeeklyHours.toFixed(2)}
 				disabled='true'
+				textAlign='center'
 			/>
 		</>
 	)

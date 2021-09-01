@@ -123,7 +123,9 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 								</>
 							)
 						})}
-					<TotalHours triggerChange={triggerChange} />
+					<div>
+						<TotalHours triggerChange={triggerChange} />
+					</div>
 				</div>
 				<div></div>
 			</div>

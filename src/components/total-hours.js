@@ -27,12 +27,12 @@ export default function TotalHours({ triggerChange }) {
 
 	return (
 		<>
-			<h4 className='text-red-600 font-semibold'>Total Hours Worked: </h4>
+			<h4 className='text-center text-red-600 font-semibold'>Total Hours Worked </h4>
 			<TailwindInput
 				id='totalWeeklyHours'
 				aria-label='Total hours worked'
 				type='text'
-				value={totalWeeklyHours}
+				value={totalWeeklyHours.toFixed(2)}
 				disabled='true'
 			/>
 		</>

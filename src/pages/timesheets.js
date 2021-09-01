@@ -9,11 +9,15 @@ function Timesheets() {
 	return (
 		<>
 			<Layout>
-				<div>
-					<form>
-						<Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
-						<GrabContents />
-					</form>
+				<div className='flex flex-wrap items-center justify-between'>
+					<div></div>
+					<div>
+						<form className='bg-white max-w-3xl shadow-md  rounded px-8 pt-6 pb-8 mb-4'>
+							<Dates triggerChange={triggerChange} setTriggerChange={setTriggerChange} />
+							<GrabContents />
+						</form>
+					</div>
+					<div></div>
 				</div>
 			</Layout>
 		</>

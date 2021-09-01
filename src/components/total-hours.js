@@ -27,11 +27,11 @@ export default function TotalHours({ triggerChange }) {
 
 	return (
 		<>
-			<h4 className='text-center text-red-600 font-semibold'>Total Hours Worked </h4>
-			<TailwindInput
+			<input
+				className='text-red-600 text-center font-semibold shadow appearance-none border rounded w-full py-2 px-3 leading-tight'
 				id='totalWeeklyHours'
 				type='text'
-				value={totalWeeklyHours.toFixed(2)}
+				value={`Total Hours Worked: ${totalWeeklyHours.toFixed(2)}`}
 				disabled='true'
 				//send prop to align text
 				textAlign='center'

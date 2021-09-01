@@ -6,9 +6,11 @@ export default function Links() {
 	const { currentUser, logout } = useAuth()
 	return (
 		<>
-			<Link className='p-4' to='/'>
-				Home
-			</Link>
+			{currentUser && (
+				<Link className='p-4' to='/'>
+					Home
+				</Link>
+			)}
 			{!currentUser && (
 				<Link className='p-4' to='/login'>
 					Login

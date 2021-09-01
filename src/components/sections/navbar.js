@@ -8,10 +8,10 @@ export default function Navbar() {
 	return (
 		<>
 			<nav
-				className='flex justify-around items-center h-16 bg-gray-400 text-black relative shadow-sm font-mono'
+				className='flex justify-between items-center h-16 bg-gray-200 text-black relative shadow-sm font-mono'
 				role='navigation'
 			>
-				<Link to='/' className='pl-8'>
+				<Link to='/' className='pl-5'>
 					True Canadian Security Corp. Employee Portal
 				</Link>
 				<div className='px-4 cursor-pointer md:hidden'>
@@ -30,16 +30,18 @@ export default function Navbar() {
 						/>
 					</svg>
 				</div>
-				<div className='lg:block hidden'>
-					{currentUser && (
-						<p>
-							Hello, {currentUser.displayName} Employee ID:{" "}
-							{currentUser.uid.slice(0, 4).toUpperCase()}
-						</p>
-					)}
-				</div>
+
 				<div className='pr-8 md:block hidden'>
 					<Links />
+					<div className='md:block hidden'>
+						{currentUser && (
+							<h4 className='text-right font-bold'>
+								Hello, {currentUser.displayName}
+								{/* <br /> Employee ID:
+								{currentUser.uid.slice(0, 4).toUpperCase()} */}
+							</h4>
+						)}
+					</div>
 				</div>
 			</nav>
 		</>

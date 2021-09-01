@@ -8,6 +8,8 @@ export default function GrabContents() {
 
 	const { currentUser } = useAuth()
 
+	const [dataMessage, setDataMessage] = useState("")
+
 	const currentDate = getDate(Date.now())
 	const currentMonth = getMonth(Date.now())
 	const currentYear = getYear(Date.now())
@@ -122,7 +124,9 @@ export default function GrabContents() {
 						hoursWorkedContents.value = doc.data().hoursWorked[i]
 					}
 					let totalWeeklyHoursContents = document.getElementById("totalWeeklyHours")
-					totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
+					totalWeeklyHoursContents.value = `Total Hours Worked: ${
+						doc.data().totalWeeklyHours
+					}`
 				}, 10)
 			}
 		}
@@ -132,7 +136,7 @@ export default function GrabContents() {
 	return (
 		<>
 			<p>
-				<div className='flex flex-wrap items-center justify-between'>
+				<div className='flex flex-wrap items-center justify-between text-center'>
 					<div></div>
 					<div className='mt-4'>
 						<button
@@ -140,7 +144,9 @@ export default function GrabContents() {
 							onClick={handleSubmit}
 						>
 							Save Data
-						</button>
+						</button>{" "}
+						<br />
+						{dataMessage}
 					</div>
 					<div></div>
 				</div>

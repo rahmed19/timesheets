@@ -33,6 +33,7 @@ export default function TotalHours({ triggerChange }) {
 				type='text'
 				value={totalWeeklyHours.toFixed(2)}
 				disabled='true'
+				//send prop to align text
 				textAlign='center'
 			/>
 		</>

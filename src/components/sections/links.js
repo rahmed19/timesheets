@@ -7,27 +7,27 @@ export default function Links() {
 	return (
 		<>
 			{currentUser && (
-				<Link className='p-4' to='/'>
+				<Link className='p-4 block md:inline' to='/'>
 					Home
 				</Link>
 			)}
 			{!currentUser && (
-				<Link className='p-4' to='/login'>
+				<Link className='p-4 block md:inline' to='/login'>
 					Login
 				</Link>
 			)}
 			{!currentUser && (
-				<Link className='p-4' to='/signup'>
+				<Link className='p-4 block md:inline' to='/signup'>
 					Sign Up
 				</Link>
 			)}
 			{currentUser && (
-				<Link className='p-4' to='/update-profile'>
+				<Link className='p-4 block md:inline' to='/update-profile'>
 					Update Profile
 				</Link>
 			)}
 			{currentUser && (
-				<Link to='/login' onClick={() => logout()}>
+				<Link className='p-4 block md:inline' to='/login' onClick={() => logout()}>
 					Log Out
 				</Link>
 			)}

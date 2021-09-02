@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../../context/auth-context"
 import Links from "./links"
 
-export default function Navbar() {
+export default function Navbar({ toggle }) {
 	const { currentUser } = useAuth()
 	return (
 		<>
@@ -12,11 +12,11 @@ export default function Navbar() {
 				role='navigation'
 			>
 				<Link to='/' className='pl-5'>
-					<strong className='font-bold text-2xl'>
+					<strong className='font-bold text-lg md:text-2xl'>
 						True Canadian Security Corp. Employee Portal
 					</strong>
 				</Link>
-				<div className='px-4 cursor-pointer md:hidden'>
+				<div className='px-4 cursor-pointer md:hidden' onClick={toggle}>
 					<svg
 						className='w-6 h-6'
 						fill='none'
@@ -37,7 +37,7 @@ export default function Navbar() {
 					<Links />
 					<div className='md:block hidden'>
 						{currentUser && (
-							<h4 className='text-right font-bold'>
+							<h4 className='text-right font-bold pr-4'>
 								Hello, {currentUser.displayName}
 								{/* <br /> Employee ID:
 								{currentUser.uid.slice(0, 4).toUpperCase()} */}

@@ -8,11 +8,13 @@ export default function Navbar() {
 	return (
 		<>
 			<nav
-				className='flex justify-between items-center h-16 bg-gray-200 text-black relative shadow-sm font-mono'
+				className='flex justify-between items-center h-16 bg-gray-200 text-black relative shadow-sm font-russo'
 				role='navigation'
 			>
 				<Link to='/' className='pl-5'>
-					True Canadian Security Corp. Employee Portal
+					<strong className='font-bold text-2xl'>
+						True Canadian Security Corp. Employee Portal
+					</strong>
 				</Link>
 				<div className='px-4 cursor-pointer md:hidden'>
 					<svg

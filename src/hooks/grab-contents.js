@@ -90,6 +90,11 @@ export default function GrabContents() {
 				hoursWorked: allHoursWorkedArray,
 				totalWeeklyHours: allTotalWeeklyHours,
 			})
+
+		setDataMessage("Your timesheet has been saved successfully.")
+		setTimeout(() => {
+			setDataMessage("")
+		}, 3000)
 	}
 
 	// auto populate the fields if record exists.
@@ -124,9 +129,7 @@ export default function GrabContents() {
 						hoursWorkedContents.value = doc.data().hoursWorked[i]
 					}
 					let totalWeeklyHoursContents = document.getElementById("totalWeeklyHours")
-					totalWeeklyHoursContents.value = `Total Hours Worked: ${
-						doc.data().totalWeeklyHours
-					}`
+					totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
 				}, 10)
 			}
 		}
@@ -142,6 +145,7 @@ export default function GrabContents() {
 						<button
 							className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
 							onClick={handleSubmit}
+							disabled={dataMessage ? true : false}
 						>
 							Save Data
 						</button>{" "}

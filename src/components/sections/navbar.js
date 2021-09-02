@@ -35,15 +35,6 @@ export default function Navbar({ toggle }) {
 
 				<div className='pr-8 md:block hidden'>
 					<Links />
-					<div className='md:block hidden'>
-						{currentUser && (
-							<h4 className='text-right font-bold pr-4'>
-								Hello, {currentUser.displayName}
-								{/* <br /> Employee ID:
-								{currentUser.uid.slice(0, 4).toUpperCase()} */}
-							</h4>
-						)}
-					</div>
 				</div>
 			</nav>
 		</>

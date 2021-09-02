@@ -31,6 +31,15 @@ export default function Links() {
 					Log Out
 				</Link>
 			)}
+			<div className='block md:inline'>
+				{currentUser && (
+					<h4 className='text-right font-bold pr-4'>
+						Hello, {currentUser.displayName}
+						{/* <br /> Employee ID:
+								{currentUser.uid.slice(0, 4).toUpperCase()} */}
+					</h4>
+				)}
+			</div>
 		</>
 	)
 }

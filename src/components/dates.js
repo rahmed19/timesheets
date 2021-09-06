@@ -102,7 +102,7 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 						datesArray.map((date, index) => {
 							return (
 								<>
-									<div className='grid grid-cols-3'>
+									<div className='md:grid md:grid-cols-3'>
 										<div id={`date-${index}`}>
 											<p className='text-center font-semibold shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'>
 												{date}

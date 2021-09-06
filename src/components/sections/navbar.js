@@ -4,7 +4,7 @@ import { useAuth } from "../../context/auth-context"
 import Links from "./links"
 
 export default function Navbar({ toggle }) {
-	const { currentUser } = useAuth()
+	//const { currentUser } = useAuth()
 	return (
 		<>
 			<nav

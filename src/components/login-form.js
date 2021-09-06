@@ -9,7 +9,6 @@ export default function LoginForm() {
 	const passwordRef = useRef()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-	const [showNext, setShowNext] = useState(false)
 
 	const { login, currentUser } = useAuth()
 
@@ -33,7 +32,12 @@ export default function LoginForm() {
 	if (!currentUser) {
 		return (
 			<>
-				<motion.div className='flex flex-wrap items-center justify-between pt-4'>
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ delay: 0.5 }}
+					className='flex flex-wrap items-center justify-between pt-4'
+				>
 					<div></div>
 					<div className='w-full max-w-sm content-center'>
 						<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-2 text-black-800'>
@@ -53,10 +57,9 @@ export default function LoginForm() {
 									type='email'
 									placeholder='Email'
 									ref={emailRef}
-									onChange={() => setShowNext(true)}
 								/>
 							</div>
-							<div class={showNext ? "mb-6" : "hidden"}>
+							<div className='mb-6'>
 								<label class='block text-gray-700 text-sm font-bold mb-2' for='password'>
 									Password
 								</label>

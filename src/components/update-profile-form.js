@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link, useHistory } from "react-router-dom"
 import TailwindInput from "../hooks/tailwind/tailwindInput"
+import { motion } from "framer-motion"
 
 export default function UpdateProfileForm() {
 	const emailRef = useRef()
@@ -49,7 +50,12 @@ export default function UpdateProfileForm() {
 
 	return (
 		<>
-			<div className='flex flex-wrap items-center justify-between'>
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ delay: 0.5 }}
+				className='flex flex-wrap items-center justify-between mt-4'
+			>
 				<div></div>
 				<div className='w-full max-w-sm content-center'>
 					<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-2 text-black-800'>
@@ -145,7 +151,7 @@ export default function UpdateProfileForm() {
 					</form>
 				</div>
 				<div></div>
-			</div>
+			</motion.div>
 		</>
 	)
 }

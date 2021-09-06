@@ -9,7 +9,7 @@ const TailwindInput = forwardRef((props, ref) => {
 			appearance-none
 			border
 			rounded
-			md:w-full
+			w-full
 			py-2
 			px-3
 			w-24

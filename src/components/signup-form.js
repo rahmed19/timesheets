@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link, useHistory, Redirect } from "react-router-dom"
 import TailwindInput from "../hooks/tailwind/tailwindInput"
+import { motion } from "framer-motion"
 
 export default function SignupForm() {
 	const emailRef = useRef()
@@ -39,7 +40,12 @@ export default function SignupForm() {
 	if (!currentUser) {
 		return (
 			<>
-				<div className='flex flex-wrap items-center justify-between'>
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ delay: 0.5 }}
+					className='flex flex-wrap items-center justify-between mt-4'
+				>
 					<div></div>
 
 					<div className='w-full max-w-sm content-center'>
@@ -130,7 +136,7 @@ export default function SignupForm() {
 						</p>
 					</div>
 					<div></div>
-				</div>
+				</motion.div>
 			</>
 		)
 	}

@@ -10,7 +10,7 @@ export default function Sidebar({ isOpen, toggle }) {
 				<div
 					className={
 						isOpen
-							? "grid gird-rows-7 justify-end rounded-lg p-4 text-right items-right bg-blue-300"
+							? "grid gird-rows-7 justify-end rounded-lg p-4 text-right items-right bg-blue-300 float-right"
 							: "hidden"
 					}
 					onClick={toggle}

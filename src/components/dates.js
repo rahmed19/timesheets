@@ -103,13 +103,13 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 							return (
 								<>
 									<div className='grid md:grid-cols-3'>
-										<div className='mt-2 mb-2 md:m-0' id={`date-${index}`}>
-											<p className='text-center font-semibold shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'>
+										<div className='mt-1 mb-1 md:m-0' id={`date-${index}`}>
+											<p className='text-center font-semibold shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'>
 												{date}
 											</p>
 										</div>
 
-										<div className='px-2'>
+										<div className='px-2 mt-1 mb-1 md:m-0'>
 											<Sitename index={index} />
 										</div>
 										<div>

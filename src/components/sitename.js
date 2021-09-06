@@ -30,7 +30,7 @@ export default function Sitename({ index }) {
 		<>
 			<select
 				id={`sitename-${index}`}
-				className='font-semibold shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
+				className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 			>
 				<option>{initialOption}</option>
 				<option></option>

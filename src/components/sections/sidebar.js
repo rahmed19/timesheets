@@ -1,22 +1,26 @@
 import React from "react"
 import Links from "./links"
+import { motion } from "framer-motion"
 
 export default function Sidebar({ isOpen, toggle }) {
 	return (
 		<>
-			<div className='flex flex-wrap items-center justify-between mr-4'>
+			<div
+			// className='flex flex-wrap items-center justify-between mr-4'
+			>
 				<div />
 				<div />
-				<div
+				<motion.div
+					animate={{ opacity: isOpen ? 1 : 0 }}
 					className={
 						isOpen
-							? "grid gird-rows-7 justify-end rounded-lg p-4 text-right items-right bg-blue-300 float-right"
+							? "grid gird-rows-7 justify-end rounded-lg p-4 text-right items-right bg-white-300"
 							: "hidden"
 					}
 					onClick={toggle}
 				>
 					<Links />
-				</div>
+				</motion.div>
 			</div>
 		</>
 	)

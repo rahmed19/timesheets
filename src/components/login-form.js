@@ -2,13 +2,17 @@ import React, { useRef, useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { Link, useHistory, Redirect } from "react-router-dom"
 import TailwindInput from "../hooks/tailwind/tailwindInput"
+import { motion } from "framer-motion"
 
 export default function LoginForm() {
 	const emailRef = useRef()
 	const passwordRef = useRef()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
+	const [showNext, setShowNext] = useState(false)
+
 	const { login, currentUser } = useAuth()
+
 	const history = useHistory()
 
 	async function handleSubmit(e) {
@@ -29,7 +33,7 @@ export default function LoginForm() {
 	if (!currentUser) {
 		return (
 			<>
-				<div className='flex flex-wrap items-center justify-between'>
+				<motion.div className='flex flex-wrap items-center justify-between pt-4'>
 					<div></div>
 					<div className='w-full max-w-sm content-center'>
 						<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-2 text-black-800'>
@@ -49,9 +53,10 @@ export default function LoginForm() {
 									type='email'
 									placeholder='Email'
 									ref={emailRef}
+									onChange={() => setShowNext(true)}
 								/>
 							</div>
-							<div class='mb-6'>
+							<div class={showNext ? "mb-6" : "hidden"}>
 								<label class='block text-gray-700 text-sm font-bold mb-2' for='password'>
 									Password
 								</label>
@@ -94,7 +99,7 @@ export default function LoginForm() {
 						</p>
 					</div>
 					<div></div>
-				</div>
+				</motion.div>
 			</>
 		)
 		// if not logged in then redirect to login page

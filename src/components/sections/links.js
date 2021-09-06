@@ -7,33 +7,33 @@ export default function Links() {
 	return (
 		<>
 			{currentUser && (
-				<Link className='p-4 block md:inline' to='/'>
+				<Link className='p-2 block md:inline' to='/'>
 					Home
 				</Link>
 			)}
 			{!currentUser && (
-				<Link className='p-4 block md:inline' to='/login'>
+				<Link className='p-2 block md:inline' to='/login'>
 					Login
 				</Link>
 			)}
 			{!currentUser && (
-				<Link className='p-4 block md:inline' to='/signup'>
+				<Link className='p-2 block md:inline' to='/signup'>
 					Sign Up
 				</Link>
 			)}
 			{currentUser && (
-				<Link className='p-4 block md:inline' to='/update-profile'>
+				<Link className='p-2 block md:inline' to='/update-profile'>
 					Update Profile
 				</Link>
 			)}
 			{currentUser && (
-				<Link className='p-4 block md:inline' to='/login' onClick={() => logout()}>
+				<Link className='p-2 block md:inline' to='/login' onClick={() => logout()}>
 					Log Out
 				</Link>
 			)}
 			<div className='block md:inline'>
 				{currentUser && (
-					<h4 className='text-right font-bold pr-4'>
+					<h4 className='text-right font-bold p-2'>
 						Hello, {currentUser.displayName}
 						{/* <br /> Employee ID:
 								{currentUser.uid.slice(0, 4).toUpperCase()} */}

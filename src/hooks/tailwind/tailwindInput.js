@@ -3,7 +3,8 @@ import React, { forwardRef } from "react"
 const TailwindInput = forwardRef((props, ref) => {
 	return (
 		<input
-			className={`text-${props.textAlign} 
+			className={`
+			text-${props.textAlign}
 			font-semibold shadow
 			appearance-none
 			border
@@ -14,7 +15,6 @@ const TailwindInput = forwardRef((props, ref) => {
 			w-24
 			mt-2
 			md:mt-0
-			text-center
 			text-gray-700
 			leading-tight
 			focus:outline-none

@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { useAuth } from "../../context/auth-context"
 import Links from "./links"
 
 export default function Navbar({ toggle }) {

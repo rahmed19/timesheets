@@ -23,8 +23,8 @@ export function AuthProvider({ children }) {
 		return auth.signInWithEmailAndPassword(email, password)
 	}
 
-	function logout() {
-		return auth.signOut()
+	async function logout() {
+		return await auth.signOut()
 	}
 
 	function resetPassword(email) {

@@ -108,7 +108,6 @@ export default function GrabContents() {
 			if (!doc.exists) {
 				console.log("no such document")
 			} else {
-				console.log(doc.data())
 				setTimeout(() => {
 					for (let i = 0; i < dateCounter; i++) {
 						//sitename

@@ -9,7 +9,7 @@ export default function WelcomePage() {
 	useEffect(() => {
 		setTimeout(() => {
 			history.push("/")
-		}, 2000)
+		}, 5000)
 	}, [])
 
 	return (
@@ -17,7 +17,7 @@ export default function WelcomePage() {
 			<h4 className='text-center text-2xl font-bold leading-normal mt-4 mb-2 text-black-800'>
 				{currentUser
 					? "Welcome to True Canadian Security Corp. Employee Portal. Your Signup Has Been Successful..."
-					: "Redirecting You To Login Page..."}
+					: "You Are Logged Out. Redirecting You To Login Page..."}
 			</h4>
 		</>
 	)

@@ -7,7 +7,7 @@ export default function Navbar({ toggle }) {
 	return (
 		<>
 			<nav
-				className='flex justify-between items-center h-16 bg-gray-200 text-black relative shadow-sm font-russo'
+				className='flex justify-between items-center h-16 text-gray-100 bg-gray-800 relative shadow-sm font-russo'
 				role='navigation'
 			>
 				<Link to='/' className='pl-5'>

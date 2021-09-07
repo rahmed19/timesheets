@@ -30,7 +30,7 @@ export default function SignupForm() {
 				firstNameRef.current.value,
 				lastNameRef.current.value
 			)
-			history.push("/")
+			history.push("/welcome-page")
 		} catch (error) {
 			setError(error.message)
 		}

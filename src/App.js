@@ -5,6 +5,7 @@ import Signup from "./pages/signup"
 import Login from "./pages/login"
 import ForgotPassword from "./pages/forgot-password"
 import UpdateProfile from "./pages/update-profile"
+import Welcome from "./pages/welcome"
 import PrivateRoute from "./hooks/private-route"
 import { AuthProvider } from "./context/auth-context"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
@@ -20,6 +21,7 @@ function App() {
 						<Route path='/signup' component={Signup} />
 						<Route path='/login' component={Login} />
 						<Route path='/forgot-password' component={ForgotPassword} />
+						<Route path='/welcome-page' component={Welcome} />
 					</Switch>
 				</AuthProvider>
 			</Router>

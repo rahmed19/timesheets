@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { getDaysInMonth, getDate, getMonth, getYear, add, format } from "date-fns"
 
 const TablesForm = () => {
 	const [allData, setAllData] = useState([
@@ -13,7 +14,7 @@ const TablesForm = () => {
 
 	const handleAddRow = index => {
 		const list = [...allData]
-		list.splice(index, 0, {
+		list.splice(index + 1, 0, {
 			date: "",
 			siteName: "",
 			signIn: "",
@@ -21,16 +22,6 @@ const TablesForm = () => {
 			hoursWorked: "",
 		})
 		setAllData(list)
-		// setAllData([
-		// 	...allData,
-		// 	{
-		// 		date: "",
-		// 		siteName: "",
-		// 		signIn: "",
-		// 		signOut: "",
-		// 		hoursWorked: "",
-		// 	},
-		// ])
 	}
 
 	const handleRemoveRow = index => {
@@ -46,20 +37,73 @@ const TablesForm = () => {
 		setAllData(list)
 	}
 
+	// DATES INFO
+
+	const currentDate = getDate(Date.now())
+	const currentMonth = getMonth(Date.now())
+	const currentYear = getYear(Date.now())
+	const daysInMonth = getDaysInMonth(Date.now())
+	const formattedMonth = format(Date.now(), "MMM")
+	const formattedYear = format(Date.now(), "yyyy")
+
+	const [datesArray, setDatesArray] = useState([])
+
+	function displayFirstTwoWeeks() {
+		let newArray = []
+		for (let i = 1; i <= 15; i++) {
+			//add and format day of the week, date, month and year
+			newArray.push(
+				`${format(
+					add(new Date(currentYear, currentMonth, i - 1), { days: 1 }),
+					"EEE"
+				)} ${formattedMonth} ${i}, ${formattedYear}`
+			)
+		}
+
+		setDatesArray(newArray)
+	}
+
+	function displaySecondTwoWeeks() {
+		let newArray = []
+		for (let i = 16; i <= daysInMonth; i++) {
+			//add and format day of the week, date, month and year
+			newArray.push(
+				`${format(
+					add(new Date(currentYear, currentMonth, i - 1), { days: 1 }),
+					"EEE"
+				)} ${formattedMonth} ${i}, ${formattedYear}`
+			)
+		}
+		setDatesArray(newArray)
+	}
+
+	useEffect(() => {
+		if (currentDate <= 15) {
+			displayFirstTwoWeeks()
+		} else {
+			displaySecondTwoWeeks()
+		}
+	}, [])
+
 	return (
 		<>
 			<div>
 				{allData.map((data, index) => {
 					return (
 						<div>
-							<input
+							<select
 								type='text'
 								name='date'
-								placeholder=''
-								value={data.date}
 								className='border bg-gray-300 ml-3'
 								onChange={e => handleInputChange(e, index)}
-							/>
+								value={data.date}
+							>
+								<option>---Select the date</option>
+								{datesArray.map(date => {
+									return <option>{date}</option>
+								})}
+							</select>
+
 							<input
 								type='text'
 								name='siteName'
@@ -92,7 +136,7 @@ const TablesForm = () => {
 								className='border bg-gray-300 ml-3'
 								onChange={e => handleInputChange(e, index)}
 							/>
-							<button onClick={handleAddRow} className='ml-3'>
+							<button onClick={() => handleAddRow(index)} className='ml-3'>
 								Add Row
 							</button>
 							<button onClick={() => handleRemoveRow(index)} className='ml-3'>

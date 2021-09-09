@@ -28,7 +28,7 @@ export default function Layout({ children }) {
 			<Navbar toggle={toggle} />
 			<Sidebar isOpen={isOpen} toggle={toggle} />
 			{children}
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	)
 }

@@ -26,7 +26,6 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 					"EEE"
 				)} ${formattedMonth} ${i}, ${formattedYear}`
 			)
-			console.log(newArray)
 		}
 
 		setDatesArray(newArray)
@@ -43,7 +42,6 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 				)} ${formattedMonth} ${i}, ${formattedYear}`
 			)
 		}
-		console.log(newArray)
 		setDatesArray(newArray)
 	}
 

@@ -1,0 +1,8 @@
+1. Double on one day for a site
+2. Total site hours matched each week
+3. Select timings based on site
+4. Messaging center: 
+generic messages for everyone
+Specific 
+5. Email database 
+6. Comment Field

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom"
 import FirebaseContext from "../context/firebase"
 import { useAuth } from "../context/auth-context"
 import { getDaysInMonth, getDate, getMonth, getYear } from "date-fns"
+import Dates from "../components/dates"
 
 export default function GrabContents() {
 	const history = useHistory()
@@ -12,6 +13,7 @@ export default function GrabContents() {
 	const { currentUser } = useAuth()
 
 	const [dataMessage, setDataMessage] = useState("")
+	const [recievedDates, setRecievedDates] = useState([])
 
 	const currentDate = getDate(Date.now())
 	const currentMonth = getMonth(Date.now())
@@ -111,8 +113,17 @@ export default function GrabContents() {
 				history.push("/tables")
 				console.log("no such document")
 			} else {
+				let recievedArray = []
+				for (let i = 0; i < doc.data().formattedDates.length; i++) {
+					recievedArray.push(i)
+				}
+				await setRecievedDates(recievedArray)
 				setTimeout(() => {
 					for (let i = 0; i < doc.data().formattedDates.length; i++) {
+						//dates
+						let dateContents = document.getElementById(`date-${i}`)
+						dateContents.value = doc.data().formattedDates[i]
+
 						//sitename
 
 						let sitenameContents = document.getElementById(`sitename-${i}`)
@@ -132,7 +143,7 @@ export default function GrabContents() {
 					}
 					let totalWeeklyHoursContents = document.getElementById("totalWeeklyHours")
 					totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
-				}, 10)
+				}, 5000)
 			}
 		}
 		return fetchData()
@@ -144,7 +155,8 @@ export default function GrabContents() {
 				<div className='flex flex-wrap items-center justify-between text-center'>
 					<div></div>
 					<div className='mt-4'>
-						<button
+						<Dates recievedDates={recievedDates} />
+						{/* <button
 							className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
 							onClick={handleSubmit}
 							disabled={dataMessage ? true : false}
@@ -152,7 +164,7 @@ export default function GrabContents() {
 							Save Data
 						</button>{" "}
 						<br />
-						{dataMessage}
+						{dataMessage} */}
 					</div>
 					<div></div>
 				</div>

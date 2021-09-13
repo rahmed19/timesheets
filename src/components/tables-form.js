@@ -31,12 +31,18 @@ const TablesForm = () => {
 			hoursWorked: "",
 		})
 		setAllData(list)
+		setNumberOfElements(prev => {
+			setNumberOfElements(prev + 1)
+		})
 	}
 
 	const handleRemoveRow = i => {
 		const list = [...allData]
 		list.splice(i, 1)
 		setAllData(list)
+		setNumberOfElements(prev => {
+			setNumberOfElements(prev - 1)
+		})
 	}
 
 	const handleInputChange = (e, i) => {
@@ -107,7 +113,7 @@ const TablesForm = () => {
 		}
 	}, [])
 
-	async function handleSubmit(e, i) {
+	async function handleSubmit(e) {
 		e.preventDefault()
 		let allDatesArray = []
 		let allSitenamesArray = []
@@ -118,7 +124,7 @@ const TablesForm = () => {
 		for (let i = 0; i < numberOfElements; i++) {
 			//formatted dates
 			let dateContents = document.getElementById(`date-${i}`)
-			dateContents && allDatesArray.push(dateContents.innerText)
+			dateContents && allDatesArray.push(dateContents.value)
 
 			//sitename
 			let sitenameContents = document.getElementById(`sitename-${i}`)
@@ -243,6 +249,11 @@ const TablesForm = () => {
 				/>
 			</div>
 			<br />
+			{numberOfElements}
+			<button onClick={e => handleSubmit(e)} className='ml-3'>
+				Submit Data <br />
+				{dataMessage}
+			</button>
 		</>
 	)
 }

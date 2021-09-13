@@ -3,8 +3,9 @@ import { getDaysInMonth, getDate, getMonth, getYear, add, format } from "date-fn
 import Sitename from "../components/sitename"
 import TimeinTimeout from "../components/timein-timeout"
 import TotalHours from "../components/total-hours"
+import TailwindInput from "../hooks/tailwind/tailwindInput"
 
-export default function Dates({ triggerChange, setTriggerChange }) {
+export default function Dates({ triggerChange, setTriggerChange, recievedDates }) {
 	const currentDate = getDate(Date.now())
 	const currentMonth = getMonth(Date.now())
 	const currentYear = getYear(Date.now())
@@ -96,15 +97,13 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 					<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-4 text-black-800'>
 						Submit Your Timesheet
 					</h4>
-					{datesArray &&
-						datesArray.map((date, index) => {
+					{recievedDates &&
+						recievedDates.map((date, index) => {
 							return (
 								<>
 									<div className='grid md:grid-cols-3'>
-										<div className='mt-1 mb-1 md:m-0' id={`date-${index}`}>
-											<p className='text-center font-semibold shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'>
-												{date}
-											</p>
+										<div className='mt-1 mb-1 md:m-0'>
+											<TailwindInput id={`date-${index}`} type='text' />
 										</div>
 
 										<div className='px-2 mt-1 mb-1 md:m-0'>
@@ -113,8 +112,8 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 										<div>
 											<TimeinTimeout
 												index={index}
-												triggerChange={triggerChange}
-												setTriggerChange={setTriggerChange}
+												// triggerChange={triggerChange}
+												// setTriggerChange={setTriggerChange}
 											/>
 										</div>
 									</div>
@@ -122,7 +121,9 @@ export default function Dates({ triggerChange, setTriggerChange }) {
 							)
 						})}
 					<div>
-						<TotalHours triggerChange={triggerChange} />
+						<TotalHours
+						// triggerChange={triggerChange}
+						/>
 					</div>
 				</div>
 				<div></div>

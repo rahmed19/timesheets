@@ -22,7 +22,7 @@ export default function Sitename({ index }) {
 					setDocs(documents)
 				})
 		}
-		console.log(auth)
+
 		return fetchData()
 	}, [])
 

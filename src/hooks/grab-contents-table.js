@@ -4,7 +4,7 @@ import FirebaseContext from "../context/firebase"
 import { useAuth } from "../context/auth-context"
 import { getDaysInMonth, getDate, getMonth, getYear } from "date-fns"
 
-export default function GrabContents() {
+export default function GrabContentsTable() {
 	const history = useHistory()
 
 	const { firebase } = useContext(FirebaseContext)

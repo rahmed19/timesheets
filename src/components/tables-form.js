@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { getDaysInMonth, getDate, getMonth, getYear, add, format } from "date-fns"
+import FirebaseContext from "../context/firebase"
+import { useAuth } from "../context/auth-context"
 
 const TablesForm = () => {
+	const { firebase } = useContext(FirebaseContext)
+
+	const { currentUser } = useAuth()
+
 	const [allData, setAllData] = useState([
 		{
 			date: "",
@@ -11,6 +17,9 @@ const TablesForm = () => {
 			hoursWorked: "",
 		},
 	])
+
+	const [dataMessage, setDataMessage] = useState("")
+	const [numberOfElements, setNumberOfElements] = useState(0)
 
 	const handleAddRow = i => {
 		const list = [...allData]
@@ -47,6 +56,19 @@ const TablesForm = () => {
 	const formattedYear = format(Date.now(), "yyyy")
 
 	const [datesArray, setDatesArray] = useState([])
+
+	let datesFilter = 0
+	if (currentDate <= 15) {
+		let currentYearString = currentYear.toString()
+		let currentMonthString = currentMonth.toString()
+		datesFilter = parseInt(1 + currentMonthString + currentYearString)
+	} else {
+		let currentYearString = currentYear.toString()
+		let currentMonthString = currentMonth.toString()
+		datesFilter = parseInt(2 + currentMonthString + currentYearString)
+	}
+
+	let allTotalWeeklyHours = 0
 
 	function displayFirstTwoWeeks() {
 		let newArray = []
@@ -85,31 +107,62 @@ const TablesForm = () => {
 		}
 	}, [])
 
-	// for (let i = 0; i < dateCounter; i++) {
-	// 	//formatted dates
-	// 	let dateContents = document.getElementById(`date-${i}`)
-	// 	dateContents && allDatesArray.push(dateContents.innerText)
+	async function handleSubmit(e, i) {
+		e.preventDefault()
+		let allDatesArray = []
+		let allSitenamesArray = []
+		let allSignInArray = []
+		let allSignOutArray = []
+		let allHoursWorkedArray = []
 
-	// 	//sitename
-	// 	let sitenameContents = document.getElementById(`sitename-${i}`)
-	// 	sitenameContents && allSitenamesArray.push(sitenameContents.value)
+		for (let i = 0; i < numberOfElements; i++) {
+			//formatted dates
+			let dateContents = document.getElementById(`date-${i}`)
+			dateContents && allDatesArray.push(dateContents.innerText)
 
-	// 	//signIn
-	// 	let signInContents = document.getElementById(`signIn-${i}`)
-	// 	signInContents && allSignInArray.push(signInContents.value)
+			//sitename
+			let sitenameContents = document.getElementById(`sitename-${i}`)
+			sitenameContents && allSitenamesArray.push(sitenameContents.value)
 
-	// 	//signOut
-	// 	let signOutContents = document.getElementById(`signOut-${i}`)
-	// 	signOutContents && allSignOutArray.push(signOutContents.value)
+			//signIn
+			let signInContents = document.getElementById(`signIn-${i}`)
+			signInContents && allSignInArray.push(signInContents.value)
 
-	// 	//hoursWorked
-	// 	let hoursWorkedContents = document.getElementById()
-	// 	hoursWorkedContents && allHoursWorkedArray.push(hoursWorkedContents.value)
-	// }
-	// //totalWeeklyHours
+			//signOut
+			let signOutContents = document.getElementById(`signOut-${i}`)
+			signOutContents && allSignOutArray.push(signOutContents.value)
 
-	// let totalWeeklyHoursContents = document.getElementById("totalWeeklyHours")
-	// allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
+			//hoursWorked
+			let hoursWorkedContents = document.getElementById(`hoursWorked-${i}`)
+			hoursWorkedContents && allHoursWorkedArray.push(hoursWorkedContents.value)
+		}
+		//totalWeeklyHours
+
+		let totalWeeklyHoursContents = document.getElementById("totalWeeklyHours")
+		allTotalWeeklyHours = parseInt(totalWeeklyHoursContents.value)
+
+		await firebase
+			.firestore()
+			.collection(`${currentUser.uid.slice(0, 4).toUpperCase()}`)
+			.doc(`${datesFilter}`)
+			.set({
+				datesFilter: datesFilter,
+				employeeId: currentUser.uid.slice(0, 4).toUpperCase(),
+				name: currentUser.displayName,
+				actualDates: "",
+				formattedDates: allDatesArray,
+				siteName: allSitenamesArray,
+				signIn: allSignInArray,
+				signOut: allSignOutArray,
+				hoursWorked: allHoursWorkedArray,
+				totalWeeklyHours: allTotalWeeklyHours,
+			})
+
+		setDataMessage("Your timesheet has been saved successfully.")
+		setTimeout(() => {
+			setDataMessage("")
+		}, 3000)
+	}
 
 	return (
 		<>
@@ -118,7 +171,7 @@ const TablesForm = () => {
 					return (
 						<div>
 							<select
-								//id={}
+								id={`date-${i}`}
 								type='text'
 								name='date'
 								className='border bg-gray-300 ml-3'
@@ -170,12 +223,24 @@ const TablesForm = () => {
 							<button onClick={() => handleAddRow(i)} className='ml-3'>
 								Add Row
 							</button>
+
 							<button onClick={() => handleRemoveRow(i)} className='ml-3'>
 								Remove Row
 							</button>
 						</div>
 					)
 				})}
+				<br />
+				<br />
+				<input
+					id='totalWeeklyHours'
+					type='text'
+					name='totalWeeklyHours'
+					placeholder=''
+					// value={data.hoursWorked}
+					className='border bg-gray-300 ml-3'
+					//onChange={e => handleInputChange(e, i)}
+				/>
 			</div>
 			<br />
 		</>

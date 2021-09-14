@@ -11,44 +11,12 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 	const formattedMonth = format(Date.now(), "MMM")
 	const formattedYear = format(Date.now(), "yyyy")
 
-	const [datesArray, setDatesArray] = useState([])
 	const [currentTwoWeeks, setCurrentTwoWeeks] = useState("")
-
-	function displayFirstTwoWeeks() {
-		let newArray = []
-		for (let i = 1; i <= 15; i++) {
-			//add and format day of the week, date, month and year
-			newArray.push(
-				`${format(
-					add(new Date(currentYear, currentMonth, i - 1), { days: 1 }),
-					"EEE"
-				)} ${formattedMonth} ${i}, ${formattedYear}`
-			)
-		}
-
-		setDatesArray(newArray)
-	}
-
-	function displaySecondTwoWeeks() {
-		let newArray = []
-		for (let i = 16; i <= daysInMonth; i++) {
-			//add and format day of the week, date, month and year
-			newArray.push(
-				`${format(
-					add(new Date(currentYear, currentMonth, i - 1), { days: 1 }),
-					"EEE"
-				)} ${formattedMonth} ${i}, ${formattedYear}`
-			)
-		}
-		setDatesArray(newArray)
-	}
 
 	useEffect(() => {
 		if (currentDate <= 15) {
-			displayFirstTwoWeeks()
 			setCurrentTwoWeeks("First Two Weeks Of")
 		} else {
-			displaySecondTwoWeeks()
 			setCurrentTwoWeeks("Second Two Weeks Of")
 		}
 	}, [])
@@ -76,13 +44,13 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 												type='text'
 												disabled='true'
 											/>
-											{/* <Sitename index={index} /> */}
 										</div>
 										<div>
 											<div className='mb-4'>
 												<div className='grid grid-cols-3'>
 													<div className='px-1'>
 														<TailwindInput
+															//index number to appropriate scalable input ID
 															id={`signIn-${index}`}
 															type='text'
 															maxLength='4'
@@ -91,6 +59,7 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 													</div>
 													<div className='px-1'>
 														<TailwindInput
+															//index number to appropriate scalable input ID
 															id={`signOut-${index}`}
 															type='text'
 															maxLength='4'
@@ -105,16 +74,10 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 															type='number'
 															max='24'
 															disabled='true'
-															//onChange={() => setTriggerChange(!triggerChange)}
 														/>
 													</div>
 												</div>
 											</div>
-											{/* <TimeinTimeout
-												index={index}
-												// triggerChange={triggerChange}
-												// setTriggerChange={setTriggerChange}
-											/> */}
 										</div>
 									</div>
 								</>

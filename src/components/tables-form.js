@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from "react"
+import { useHistory } from "react-router-dom"
 import { getDaysInMonth, getDate, getMonth, getYear, add, format } from "date-fns"
 import FirebaseContext from "../context/firebase"
 import { useAuth } from "../context/auth-context"
 
 const TablesForm = () => {
 	const { firebase } = useContext(FirebaseContext)
+
+	const history = useHistory()
 
 	const { currentUser } = useAuth()
 
@@ -121,7 +124,7 @@ const TablesForm = () => {
 		let allSignOutArray = []
 		let allHoursWorkedArray = []
 
-		for (let i = 0; i < numberOfElements; i++) {
+		for (let i = 0; i <= numberOfElements; i++) {
 			//formatted dates
 			let dateContents = document.getElementById(`date-${i}`)
 			dateContents && allDatesArray.push(dateContents.value)
@@ -167,6 +170,7 @@ const TablesForm = () => {
 		setDataMessage("Your timesheet has been saved successfully.")
 		setTimeout(() => {
 			setDataMessage("")
+			history.push("/")
 		}, 3000)
 	}
 

@@ -18,7 +18,9 @@ const TailwindInput = forwardRef((props, ref) => {
 			text-gray-700
 			leading-tight
 			focus:outline-none
-			focus:border-gray-500`}
+			focus:border-gray-500
+			`}
+			disabled={props.disabled}
 			type={props.type}
 			ref={ref}
 			id={props.id}

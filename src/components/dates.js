@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { getDaysInMonth, getDate, getMonth, getYear, add, format } from "date-fns"
-import Sitename from "../components/sitename"
-import TimeinTimeout from "../components/timein-timeout"
 import TotalHours from "../components/total-hours"
 import TailwindInput from "../hooks/tailwind/tailwindInput"
 
@@ -14,8 +12,7 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 	const formattedYear = format(Date.now(), "yyyy")
 
 	const [datesArray, setDatesArray] = useState([])
-	// const [statHolidays, setStatHolidays] = useState([])
-	// const [isStat, setIsStat] = useState(null)
+	const [currentTwoWeeks, setCurrentTwoWeeks] = useState("")
 
 	function displayFirstTwoWeeks() {
 		let newArray = []
@@ -49,45 +46,12 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 	useEffect(() => {
 		if (currentDate <= 15) {
 			displayFirstTwoWeeks()
+			setCurrentTwoWeeks("First Two Weeks Of")
 		} else {
 			displaySecondTwoWeeks()
+			setCurrentTwoWeeks("Second Two Weeks Of")
 		}
-		//get info on stat holidays
-		// fetch('https://canada-holidays.ca/api/v1/provinces/BC')
-		//     .then(response => response.json())
-		//     .then(data => {
-		//         setStatHolidays(data.province.holidays)
-		//     })
-		// console.log('stat holidays' + statHolidays)
 	}, [])
-
-	// function handleHolidays() {
-	//     for (let i = 1; i < 15; i++) {
-	//         let yearCheck = format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'yyyy')
-	//         console.log(yearCheck)
-	//         let monthCheck = format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'MM')
-	//         console.log(monthCheck)
-	//         let dateCheck = format(add(new Date(currentYear, currentMonth, i - 1), { days: 1 }), 'dd')
-	//         console.log(dateCheck)
-	//         if (statHolidays !== undefined) {
-	//             for (let a = 0; a < statHolidays.length; a++) {
-	//                 let stat = statHolidays[a].date
-	//                 let statYear = stat.substr(0, 4)
-	//                 console.log(statYear)
-	//                 let statMonth = stat.substr(5, 2)
-	//                 console.log(statMonth)
-	//                 let statDate = stat.substr(8, 2)
-	//                 console.log(statDate)
-
-	//                 if (yearCheck === statYear && monthCheck === statMonth && dateCheck === statDate) {
-	//                     setIsStat(true)
-	//                     console.log(isStat)
-
-	//                 }
-	//             }
-	//         }
-	//     }
-	// }
 
 	return (
 		<>
@@ -95,7 +59,7 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 				<div></div>
 				<div className='content-center'>
 					<h4 className='text-center text-2xl font-bold leading-normal mt-0 mb-4 text-black-800'>
-						Submit Your Timesheet
+						Your Timesheet For {currentTwoWeeks} {formattedMonth} {formattedYear} .
 					</h4>
 					{recievedDates &&
 						recievedDates.map((date, index) => {
@@ -103,18 +67,54 @@ export default function Dates({ triggerChange, setTriggerChange, recievedDates }
 								<>
 									<div className='grid md:grid-cols-3'>
 										<div className='mt-1 mb-1 md:m-0'>
-											<TailwindInput id={`date-${index}`} type='text' />
+											<TailwindInput id={`date-${index}`} type='text' disabled='true' />
 										</div>
 
 										<div className='px-2 mt-1 mb-1 md:m-0'>
-											<Sitename index={index} />
+											<TailwindInput
+												id={`sitename-${index}`}
+												type='text'
+												disabled='true'
+											/>
+											{/* <Sitename index={index} /> */}
 										</div>
 										<div>
-											<TimeinTimeout
+											<div className='mb-4'>
+												<div className='grid grid-cols-3'>
+													<div className='px-1'>
+														<TailwindInput
+															id={`signIn-${index}`}
+															type='text'
+															maxLength='4'
+															disabled='true'
+														/>
+													</div>
+													<div className='px-1'>
+														<TailwindInput
+															id={`signOut-${index}`}
+															type='text'
+															maxLength='4'
+															disabled='true'
+														/>
+													</div>
+													<div className='px-1'>
+														<TailwindInput
+															//index number to appropriate scalable input ID
+
+															id={`hoursWorked-${index}`}
+															type='number'
+															max='24'
+															disabled='true'
+															//onChange={() => setTriggerChange(!triggerChange)}
+														/>
+													</div>
+												</div>
+											</div>
+											{/* <TimeinTimeout
 												index={index}
 												// triggerChange={triggerChange}
 												// setTriggerChange={setTriggerChange}
-											/>
+											/> */}
 										</div>
 									</div>
 								</>

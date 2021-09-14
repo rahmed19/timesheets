@@ -19,11 +19,12 @@ function App() {
 					<Switch>
 						<PrivateRoute exact path='/' component={Timesheets} />
 						<PrivateRoute path='/update-profile' component={UpdateProfile} />
+						<PrivateRoute path='/tables' component={Tables} />
 						<Route path='/signup' component={Signup} />
 						<Route path='/login' component={Login} />
 						<Route path='/forgot-password' component={ForgotPassword} />
 						<Route path='/welcome-page' component={Welcome} />
-						<Route path='/tables' component={Tables} />
+						<PrivateRoute path='/tables' component={Tables} />
 					</Switch>
 				</AuthProvider>
 			</Router>

@@ -110,7 +110,10 @@ export default function GrabContents() {
 				.doc(`${datesFilter}`)
 			const doc = await collectionRef.get()
 			if (!doc.exists) {
-				history.push("/tables")
+				setTimeout(() => {
+					history.push("/tables")
+				}, 5000)
+
 				console.log("no such document")
 			} else {
 				let recievedArray = []
@@ -143,7 +146,7 @@ export default function GrabContents() {
 					}
 					let totalWeeklyHoursContents = document.getElementById("totalWeeklyHours")
 					totalWeeklyHoursContents.value = doc.data().totalWeeklyHours
-				}, 5000)
+				}, 100)
 			}
 		}
 		return fetchData()

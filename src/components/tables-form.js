@@ -11,6 +11,10 @@ const TablesForm = () => {
 
 	const { currentUser } = useAuth()
 
+	const [docs, setDocs] = useState([])
+
+	const [trigger, setTrigger] = useState(false)
+
 	const [allData, setAllData] = useState([
 		{
 			date: "",
@@ -53,6 +57,9 @@ const TablesForm = () => {
 		const list = [...allData]
 		list[i][name] = value
 		setAllData(list)
+		if (name === "sitename") {
+			console.log("hello from name change")
+		}
 	}
 
 	// DATES INFO
@@ -111,10 +118,34 @@ const TablesForm = () => {
 	useEffect(() => {
 		if (currentDate <= 15) {
 			displayFirstTwoWeeks()
+			//trigger to sitenames
+			setTrigger(!trigger)
 		} else {
 			displaySecondTwoWeeks()
+			//trigger to sitenames
+			setTrigger(!trigger)
 		}
 	}, [])
+
+	//get sitenames from firebase
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await firebase
+				.firestore()
+				.collection("sites")
+				.get()
+				.then(snapshot => {
+					let documents = []
+					snapshot.forEach(doc => {
+						documents.push({ ...doc.data(), id: doc.id })
+					})
+					setDocs(documents)
+				})
+			console.log(docs)
+		}
+
+		return () => fetchData()
+	}, [trigger])
 
 	async function handleSubmit(e) {
 		e.preventDefault()
@@ -194,15 +225,23 @@ const TablesForm = () => {
 								})}
 							</select>
 
-							<input
-								id={`sitename-${i}`}
-								type='text'
-								name='siteName'
-								placeholder=''
-								value={data.siteName}
-								className='border bg-gray-300 ml-3'
-								onChange={e => handleInputChange(e, i)}
-							/>
+							{docs && (
+								<select
+									id={`sitename-${i}`}
+									name='sitename'
+									onChange={e => handleInputChange(e, i)}
+
+									//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
+								>
+									<option>---Select your site</option>
+									<option></option>
+									{docs &&
+										docs.map(doc => {
+											return <option key={doc.id}>{doc.sitename}</option>
+										})}
+								</select>
+							)}
+
 							<input
 								id={`signIn-${i}`}
 								type='text'
@@ -257,6 +296,9 @@ const TablesForm = () => {
 			<button onClick={e => handleSubmit(e)} className='ml-3'>
 				Submit Data <br />
 				{dataMessage}
+			</button>
+			<button onClick={() => console.log(docs)} className='ml-3'>
+				Console
 			</button>
 		</>
 	)

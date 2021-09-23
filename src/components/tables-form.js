@@ -297,9 +297,10 @@ const TablesForm = () => {
 				Submit Data <br />
 				{dataMessage}
 			</button>
-			<button onClick={() => console.log(docs)} className='ml-3'>
-				Console
-			</button>
+			<br />
+			<br />
+			{docs.length !== 0 ? docs[0].timeframe : null}
+			{currentUser.uid}
 		</>
 	)
 }

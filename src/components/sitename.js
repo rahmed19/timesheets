@@ -24,8 +24,7 @@ export default function Sitename(sites) {
 		}
 
 		return () => fetchData()
-		console.log(docs)
-	}, [sites])
+	}, [])
 
 	return { docs }
 

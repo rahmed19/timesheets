@@ -147,6 +147,20 @@ const TablesForm = () => {
 		return () => fetchData()
 	}, [trigger])
 
+	async function handleSubRecord(e) {
+		e.preventDefault()
+
+		await firebase
+			.firestore()
+			.collection("sites")
+			.doc("One Pacific")
+			.collection(`${datesFilter}`)
+			.doc("timeframe")
+			.set({
+				timeframeIndex: 1,
+			})
+	}
+
 	async function handleSubmit(e) {
 		e.preventDefault()
 		let allDatesArray = []
@@ -299,8 +313,12 @@ const TablesForm = () => {
 			</button>
 			<br />
 			<br />
+			<button onClick={e => handleSubRecord(e)} className='ml-3'>
+				Sub Record <br />
+			</button>
 			{docs.length !== 0 ? docs[0].timeframe : null}
-			{currentUser.uid}
+			<br />
+			{currentUser.uid.slice(0, 4).toUpperCase()}
 		</>
 	)
 }

@@ -58,7 +58,16 @@ const TablesForm = () => {
 		list[i][name] = value
 		setAllData(list)
 		if (name === "sitename") {
-			console.log("hello from name change")
+			console.log("hello from name change" + e.target.value)
+			firebase
+				.firestore()
+				.collection("timeframeIndex")
+				.doc(`${e.target.value}`)
+				.collection(`${datesFilter}`)
+				.doc("UsedUpSlots")
+				.set({
+					timeframeIndex: [1, 2, 3, 4, 5, 6, 7, 9],
+				})
 		}
 	}
 
@@ -152,12 +161,12 @@ const TablesForm = () => {
 
 		await firebase
 			.firestore()
-			.collection("sites")
+			.collection("timeframeIndex")
 			.doc("One Pacific")
 			.collection(`${datesFilter}`)
-			.doc("timeframe")
+			.doc("UsedUpSlots")
 			.set({
-				timeframeIndex: 1,
+				timeframeIndex: [1, 2, 3],
 			})
 	}
 

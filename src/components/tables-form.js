@@ -12,9 +12,7 @@ const TablesForm = () => {
 	const { currentUser } = useAuth()
 
 	const [docs, setDocs] = useState([])
-
 	const [trigger, setTrigger] = useState(false)
-
 	const [allData, setAllData] = useState([
 		{
 			date: "",
@@ -24,9 +22,11 @@ const TablesForm = () => {
 			hoursWorked: "",
 		},
 	])
-
 	const [dataMessage, setDataMessage] = useState("")
 	const [numberOfElements, setNumberOfElements] = useState(0)
+	const [firebaseDate, setFirebaseDate] = useState("")
+	const [firebaseSitename, setFirebaseSitename] = useState("")
+	const [disabled, setDisabled] = useState(true)
 
 	const handleAddRow = i => {
 		const list = [...allData]
@@ -57,17 +57,18 @@ const TablesForm = () => {
 		const list = [...allData]
 		list[i][name] = value
 		setAllData(list)
+		if (name === "date") {
+			if (e.target.value === "---Select the date") {
+				setDisabled(true)
+			} else {
+				setDisabled(false)
+				setFirebaseDate(e.target.value)
+			}
+			console.log("disabled value " + disabled)
+			console.log("firebase date " + firebaseDate)
+		}
 		if (name === "sitename") {
-			console.log("hello from name change" + e.target.value)
-			firebase
-				.firestore()
-				.collection("timeframeIndex")
-				.doc(`${e.target.value}`)
-				.collection(`${datesFilter}`)
-				.doc("UsedUpSlots")
-				.set({
-					timeframeIndex: [1, 2, 3, 4, 5, 6, 7, 9],
-				})
+			setFirebaseSitename(e.target.value)
 		}
 	}
 
@@ -124,6 +125,18 @@ const TablesForm = () => {
 		setDatesArray(newArray)
 	}
 
+	function timeindexSetup(date, site) {
+		firebase
+			.firestore()
+			.collection("timeframeIndex")
+			.doc(`${date}`)
+			.collection(`${date}`)
+			.doc("UsedUpSlots")
+			.set({
+				timeframeIndex: [1, 2, 3, 13],
+			})
+	}
+
 	useEffect(() => {
 		if (currentDate <= 15) {
 			displayFirstTwoWeeks()
@@ -155,20 +168,6 @@ const TablesForm = () => {
 
 		return () => fetchData()
 	}, [trigger])
-
-	async function handleSubRecord(e) {
-		e.preventDefault()
-
-		await firebase
-			.firestore()
-			.collection("timeframeIndex")
-			.doc("One Pacific")
-			.collection(`${datesFilter}`)
-			.doc("UsedUpSlots")
-			.set({
-				timeframeIndex: [1, 2, 3],
-			})
-	}
 
 	async function handleSubmit(e) {
 		e.preventDefault()
@@ -253,6 +252,7 @@ const TablesForm = () => {
 									id={`sitename-${i}`}
 									name='sitename'
 									onChange={e => handleInputChange(e, i)}
+									disabled={disabled}
 
 									//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 								>
@@ -321,11 +321,6 @@ const TablesForm = () => {
 				{dataMessage}
 			</button>
 			<br />
-			<br />
-			<button onClick={e => handleSubRecord(e)} className='ml-3'>
-				Sub Record <br />
-			</button>
-			{docs.length !== 0 ? docs[0].timeframe : null}
 			<br />
 			{currentUser.uid.slice(0, 4).toUpperCase()}
 		</>

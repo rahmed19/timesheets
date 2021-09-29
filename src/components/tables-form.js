@@ -25,6 +25,206 @@ const TablesForm = () => {
 	const [dataMessage, setDataMessage] = useState("")
 	const [numberOfElements, setNumberOfElements] = useState(0)
 
+	let timeIn = [
+		"11:00 PM",
+		"11:15 PM",
+		"11:30 PM",
+		"11:45 PM",
+		"12:00 AM",
+		"12:15 AM",
+		"12:30 AM",
+		"12:45 AM",
+		"01:00 AM",
+		"01:15 AM",
+		"01:30 AM",
+		"01:45 AM",
+		"02:00 AM",
+		"02:15 AM",
+		"02:30 AM",
+		"02:45 AM",
+		"03:00 AM",
+		"03:15 AM",
+		"03:30 AM",
+		"03:45 AM",
+		"04:00 AM",
+		"04:15 AM",
+		"04:30 AM",
+		"04:45 AM",
+		"05:00 AM",
+		"05:15 AM",
+		"05:30 AM",
+		"05:45 AM",
+		"06:00 AM",
+		"06:15 AM",
+		"06:30 AM",
+		"06:45 AM",
+		"07:00 AM",
+		"07:15 AM",
+		"07:30 AM",
+		"07:45 AM",
+		"08:00 AM",
+		"08:15 AM",
+		"08:30 AM",
+		"08:45 AM",
+		"09:00 AM",
+		"09:15 AM",
+		"09:30 AM",
+		"09:45 AM",
+		"10:00 AM",
+		"10:15 AM",
+		"10:30 AM",
+		"10:45 AM",
+		"11:00 AM",
+		"11:15 AM",
+		"11:30 AM",
+		"11:45 AM",
+		"12:00 PM",
+		"12:15 PM",
+		"12:30 PM",
+		"12:45 PM",
+		"01:00 PM",
+		"01:15 PM",
+		"01:30 PM",
+		"01:45 PM",
+		"02:00 PM",
+		"02:15 PM",
+		"02:30 PM",
+		"02:45 PM",
+		"03:00 PM",
+		"03:15 PM",
+		"03:30 PM",
+		"03:45 PM",
+		"04:00 PM",
+		"04:15 PM",
+		"04:30 PM",
+		"04:45 PM",
+		"05:00 PM",
+		"05:15 PM",
+		"05:30 PM",
+		"05:45 PM",
+		"06:00 PM",
+		"06:15 PM",
+		"06:30 PM",
+		"06:45 PM",
+		"07:00 PM",
+		"07:15 PM",
+		"07:30 PM",
+		"07:45 PM",
+		"08:00 PM",
+		"08:15 PM",
+		"08:30 PM",
+		"08:45 PM",
+		"09:00 PM",
+		"09:15 PM",
+		"09:30 PM",
+		"09:45 PM",
+		"10:00 PM",
+		"10:15 PM",
+		"10:30 PM",
+		"10:45 PM",
+		"11:00 PM",
+	]
+
+	let timeOut = [
+		"11:00 PM",
+		"11:15 PM",
+		"11:30 PM",
+		"11:45 PM",
+		"12:00 AM",
+		"12:15 AM",
+		"12:30 AM",
+		"12:45 AM",
+		"01:00 AM",
+		"01:15 AM",
+		"01:30 AM",
+		"01:45 AM",
+		"02:00 AM",
+		"02:15 AM",
+		"02:30 AM",
+		"02:45 AM",
+		"03:00 AM",
+		"03:15 AM",
+		"03:30 AM",
+		"03:45 AM",
+		"04:00 AM",
+		"04:15 AM",
+		"04:30 AM",
+		"04:45 AM",
+		"05:00 AM",
+		"05:15 AM",
+		"05:30 AM",
+		"05:45 AM",
+		"06:00 AM",
+		"06:15 AM",
+		"06:30 AM",
+		"06:45 AM",
+		"07:00 AM",
+		"07:15 AM",
+		"07:30 AM",
+		"07:45 AM",
+		"08:00 AM",
+		"08:15 AM",
+		"08:30 AM",
+		"08:45 AM",
+		"09:00 AM",
+		"09:15 AM",
+		"09:30 AM",
+		"09:45 AM",
+		"10:00 AM",
+		"10:15 AM",
+		"10:30 AM",
+		"10:45 AM",
+		"11:00 AM",
+		"11:15 AM",
+		"11:30 AM",
+		"11:45 AM",
+		"12:00 PM",
+		"12:15 PM",
+		"12:30 PM",
+		"12:45 PM",
+		"01:00 PM",
+		"01:15 PM",
+		"01:30 PM",
+		"01:45 PM",
+		"02:00 PM",
+		"02:15 PM",
+		"02:30 PM",
+		"02:45 PM",
+		"03:00 PM",
+		"03:15 PM",
+		"03:30 PM",
+		"03:45 PM",
+		"04:00 PM",
+		"04:15 PM",
+		"04:30 PM",
+		"04:45 PM",
+		"05:00 PM",
+		"05:15 PM",
+		"05:30 PM",
+		"05:45 PM",
+		"06:00 PM",
+		"06:15 PM",
+		"06:30 PM",
+		"06:45 PM",
+		"07:00 PM",
+		"07:15 PM",
+		"07:30 PM",
+		"07:45 PM",
+		"08:00 PM",
+		"08:15 PM",
+		"08:30 PM",
+		"08:45 PM",
+		"09:00 PM",
+		"09:15 PM",
+		"09:30 PM",
+		"09:45 PM",
+		"10:00 PM",
+		"10:15 PM",
+		"10:30 PM",
+		"10:45 PM",
+		"11:00 PM",
+	]
+
 	const handleAddRow = i => {
 		const list = [...allData]
 		list.splice(i + 1, 0, {
@@ -447,7 +647,7 @@ const TablesForm = () => {
 									id={`sitename-${i}`}
 									name='sitename'
 									onChange={e => handleInputChange(e, i)}
-
+									className='border bg-gray-300 ml-3'
 									//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 								>
 									<option>---Select your site</option>
@@ -458,8 +658,47 @@ const TablesForm = () => {
 										})}
 								</select>
 							)}
+							<select
+								id={`signIn-${i}`}
+								name='signIn'
+								onChange={e => handleInputChange(e, i)}
+								className='border bg-gray-300 ml-3'
+								//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
+							>
+								<option>---Sign In</option>
+								<option></option>
+								{timeIn.map(time => {
+									return (
+										<option
+										//key={time.id}
+										>
+											{time}
+										</option>
+									)
+								})}
+							</select>
 
-							<input
+							<select
+								id={`signOut-${i}`}
+								name='signOut'
+								onChange={e => handleInputChange(e, i)}
+								className='border bg-gray-300 ml-3'
+								//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
+							>
+								<option>---Sign Out</option>
+								<option></option>
+								{timeOut.map(time => {
+									return (
+										<option
+										//key={time.id}
+										>
+											{time}
+										</option>
+									)
+								})}
+							</select>
+
+							{/* <input
 								id={`signIn-${i}`}
 								type='text'
 								name='signIn'
@@ -476,7 +715,7 @@ const TablesForm = () => {
 								value={data.signOut}
 								className='border bg-gray-300 ml-3'
 								onChange={e => handleInputChange(e, i)}
-							/>
+							/> */}
 							<input
 								id={`hoursWorked-${i}`}
 								type='text'

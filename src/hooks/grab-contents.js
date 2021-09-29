@@ -112,7 +112,7 @@ export default function GrabContents() {
 			if (!doc.exists) {
 				setTimeout(() => {
 					history.push("/tables")
-				}, 5000)
+				}, 3000)
 
 				console.log("no such document")
 			} else {

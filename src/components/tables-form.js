@@ -24,9 +24,6 @@ const TablesForm = () => {
 	])
 	const [dataMessage, setDataMessage] = useState("")
 	const [numberOfElements, setNumberOfElements] = useState(0)
-	const [firebaseDate, setFirebaseDate] = useState("")
-	const [firebaseSitename, setFirebaseSitename] = useState("")
-	const [disabled, setDisabled] = useState(true)
 
 	const handleAddRow = i => {
 		const list = [...allData]
@@ -52,23 +49,32 @@ const TablesForm = () => {
 		})
 	}
 
-	const handleInputChange = (e, i) => {
+	const handleInputChange = async (e, i) => {
 		const { name, value } = e.target
 		const list = [...allData]
 		list[i][name] = value
-		setAllData(list)
-		if (name === "date") {
-			if (e.target.value === "---Select the date") {
-				setDisabled(true)
-			} else {
-				setDisabled(false)
-				setFirebaseDate(e.target.value)
-			}
-			console.log("disabled value " + disabled)
-			console.log("firebase date " + firebaseDate)
-		}
+		await setAllData(list)
+		// if (name === "date") {
+		// 	if (e.target.value === "---Select the date") {
+		// 	} else {
+		// 		let d = document.getElementById(`date-${i}`).value
+		// 		console.log(d)
+		// 	}
+		// }
+
 		if (name === "sitename") {
-			setFirebaseSitename(e.target.value)
+			let d = document.getElementById(`date-${i}`).value
+			let sn = document.getElementById(`sitename-${i}`).value
+			if (d !== "---Select the date")
+				firebase
+					.firestore()
+					.collection("timeframeIndex")
+					.doc(`${d}`)
+					.collection(`${sn}`)
+					.doc("UsedUpSlots")
+					.set({
+						timeframeIndex: [13, 2, 3, 4, 5, 6, 7, 9, 13],
+					})
 		}
 	}
 
@@ -123,18 +129,6 @@ const TablesForm = () => {
 			)
 		}
 		setDatesArray(newArray)
-	}
-
-	function timeindexSetup(date, site) {
-		firebase
-			.firestore()
-			.collection("timeframeIndex")
-			.doc(`${date}`)
-			.collection(`${date}`)
-			.doc("UsedUpSlots")
-			.set({
-				timeframeIndex: [1, 2, 3, 13],
-			})
 	}
 
 	useEffect(() => {
@@ -252,7 +246,6 @@ const TablesForm = () => {
 									id={`sitename-${i}`}
 									name='sitename'
 									onChange={e => handleInputChange(e, i)}
-									disabled={disabled}
 
 									//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 								>

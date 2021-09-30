@@ -24,6 +24,8 @@ const TablesForm = () => {
 	])
 	const [dataMessage, setDataMessage] = useState("")
 	const [numberOfElements, setNumberOfElements] = useState(0)
+	const [signInIndex, setSignInIndex] = useState(0)
+	const [signOutIndex, setSignOutIndex] = useState(0)
 
 	let timeIn = [
 		"11:00 PM",
@@ -261,6 +263,22 @@ const TablesForm = () => {
 		// 		console.log(d)
 		// 	}
 		// }
+
+		if (name === "signIn") {
+			//Get the index number of selcted sign in option
+			var selectBox = document.getElementById(`signIn-${i}`)
+			var selectValueIndex = selectBox.options[selectBox.selectedIndex].index
+			setSignInIndex(selectValueIndex)
+			//alert(selectValueIndex)
+		}
+
+		if (name === "signOut") {
+			//Get the index number of selcted sign in option
+			var selectBox = document.getElementById(`signOut-${i}`)
+			var selectValueIndex = selectBox.options[selectBox.selectedIndex].index
+			setSignOutIndex(selectValueIndex)
+			//alert(selectValueIndex)
+		}
 
 		if (name === "sitename") {
 			let d = document.getElementById(`date-${i}`).value
@@ -667,11 +685,9 @@ const TablesForm = () => {
 							>
 								<option>---Sign In</option>
 								<option></option>
-								{timeIn.map(time => {
+								{timeIn.map((time, index) => {
 									return (
-										<option
-										//key={time.id}
-										>
+										<option id='timeInOption' key={index}>
 											{time}
 										</option>
 									)
@@ -756,6 +772,12 @@ const TablesForm = () => {
 			<br />
 			<br />
 			{currentUser.uid.slice(0, 4).toUpperCase()}
+			<br />
+			<br />
+			Time In Index: {signInIndex}
+			<br />
+			<br />
+			Time Out Index: {signOutIndex}
 		</>
 	)
 }

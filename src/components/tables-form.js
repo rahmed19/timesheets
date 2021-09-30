@@ -256,13 +256,19 @@ const TablesForm = () => {
 		const list = [...allData]
 		list[i][name] = value
 		await setAllData(list)
-		// if (name === "date") {
-		// 	if (e.target.value === "---Select the date") {
-		// 	} else {
-		// 		let d = document.getElementById(`date-${i}`).value
-		// 		console.log(d)
-		// 	}
-		// }
+
+		if (name === "date") {
+			//disable certain fields if date is not selected
+			if (e.target.value === "---Select the date") {
+				document.getElementById(`sitename-${i}`).disabled = true
+				document.getElementById(`signIn-${i}`).disabled = true
+				document.getElementById(`signOut-${i}`).disabled = true
+			} else {
+				document.getElementById(`sitename-${i}`).disabled = false
+				document.getElementById(`signIn-${i}`).disabled = false
+				document.getElementById(`signOut-${i}`).disabled = false
+			}
+		}
 
 		if (name === "signIn") {
 			//Get the index number of selcted sign in option
@@ -273,7 +279,7 @@ const TablesForm = () => {
 		}
 
 		if (name === "signOut") {
-			//Get the index number of selcted sign in option
+			//Get the index number of selcted sign out option
 			var selectBox = document.getElementById(`signOut-${i}`)
 			var selectValueIndex = selectBox.options[selectBox.selectedIndex].index
 			setSignOutIndex(selectValueIndex)
@@ -490,9 +496,6 @@ const TablesForm = () => {
 							"11:00 PM",
 						],
 					})
-			} else {
-				console.log("alert")
-				alert("Please select a date.")
 			}
 		}
 	}
@@ -666,6 +669,7 @@ const TablesForm = () => {
 									name='sitename'
 									onChange={e => handleInputChange(e, i)}
 									className='border bg-gray-300 ml-3'
+									disabled='true'
 									//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 								>
 									<option>---Select your site</option>
@@ -681,6 +685,7 @@ const TablesForm = () => {
 								name='signIn'
 								onChange={e => handleInputChange(e, i)}
 								className='border bg-gray-300 ml-3'
+								disabled='true'
 								//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 							>
 								<option>---Sign In</option>
@@ -699,6 +704,7 @@ const TablesForm = () => {
 								name='signOut'
 								onChange={e => handleInputChange(e, i)}
 								className='border bg-gray-300 ml-3'
+								disabled='true'
 								//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 							>
 								<option>---Sign Out</option>

@@ -196,6 +196,9 @@ const TablesForm = () => {
 				// 	})
 				document.getElementById(`signIn-${i}`).disabled = false
 				document.getElementById(`signOut-${i}`).disabled = false
+				setTimeout(() => {
+					fetchFirebaseIndex(d, sn)
+				}, 2000)
 			}
 		}
 
@@ -335,9 +338,6 @@ const TablesForm = () => {
 						firebaseArray: newFireBaseArray,
 					})
 			}, 1000)
-			setTimeout(() => {
-				fetchFirebaseIndex(date, sitename)
-			}, 2000)
 		}
 	}
 

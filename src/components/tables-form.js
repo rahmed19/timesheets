@@ -242,6 +242,9 @@ const TablesForm = () => {
 		setNumberOfElements(prev => {
 			setNumberOfElements(prev + 1)
 		})
+		let d = document.getElementById(`date-${i}`).value
+		let sn = document.getElementById(`sitename-${i}`).value
+		handleFirebaseIndex(d, sn)
 	}
 
 	const handleRemoveRow = i => {
@@ -298,15 +301,23 @@ const TablesForm = () => {
 		if (name === "signIn") {
 			//Get the index number of selcted sign in option
 			var selectBox = document.getElementById(`signIn-${i}`)
-			setSignInIndex(selectBox.options[selectBox.selectedIndex].index)
-			console.log(signInIndex)
+			await setSignInIndex(selectBox.options[selectBox.selectedIndex].index)
+			setTimeout(() => {
+				console.log(signInIndex)
+			}, 2000)
 		}
 
 		if (name === "signOut") {
 			//Get the index number of selcted sign out option
+
 			var selectSignOutBox = document.getElementById(`signOut-${i}`)
 			setSignOutIndex(selectSignOutBox.options[selectSignOutBox.selectedIndex].index)
-			console.log(signOutIndex)
+			// console.log(signOutIndex)
+			// setTimeout(() => {
+			// 	console.log("signout trigger")
+			// 	handleFirebaseIndex(d, sn)
+			// 	//document.getElementById("handleFirebaseIndex").click()
+			// }, 3000)
 		}
 	}
 
@@ -395,7 +406,8 @@ const TablesForm = () => {
 		return () => fetchData()
 	}, [trigger])
 
-	function handleFirebaseIndex() {
+	//update firebase with new timeslots for the selected date and site.
+	function handleFirebaseIndex(date, sitename) {
 		if (signOutIndex - signInIndex <= 0) {
 			alert(
 				`Please make sure your sign out time is after your sign in time. ${
@@ -409,19 +421,19 @@ const TablesForm = () => {
 			console.log("array bottom " + arrayBottom)
 			var newFireBaseArray = [...arrayTop, "---", ...arrayBottom]
 			console.log("firebase Array" + newFireBaseArray)
-
-			// 	firebase
-			// 			.firestore()
-			// 			.collection("timeframeIndex")
-			// 			.doc(`${d}`)
-			// 			.collection(`${sn}`)
-			// 			.doc("UsedUpSlots")
-			// 			.set({
-			// 				//get array information from above declared time slots
-			// 				timeIn: timeIn,
-			// 				timeOut: timeOut,
-			// 			})
-			// }
+			setTimeout(() => {
+				console.log("firebase trigger")
+				firebase
+					.firestore()
+					.collection("timeframeIndex")
+					.doc(`${date}`)
+					.collection(`${sitename}`)
+					.doc("UsedUpSlots")
+					.set({
+						//get array information from above declared time slots
+						firebaseArray: newFireBaseArray,
+					})
+			}, 1000)
 		}
 	}
 
@@ -627,6 +639,7 @@ const TablesForm = () => {
 			<br />
 			<br />
 			<button
+				id='handleFirebaseIndex'
 				onClick={() => {
 					handleFirebaseIndex()
 				}}

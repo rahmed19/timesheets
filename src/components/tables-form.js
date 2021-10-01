@@ -11,6 +11,106 @@ const TablesForm = () => {
 
 	const { currentUser } = useAuth()
 
+	let defaultTime = [
+		"11:00 PM",
+		"11:15 PM",
+		"11:30 PM",
+		"11:45 PM",
+		"12:00 AM",
+		"12:15 AM",
+		"12:30 AM",
+		"12:45 AM",
+		"01:00 AM",
+		"01:15 AM",
+		"01:30 AM",
+		"01:45 AM",
+		"02:00 AM",
+		"02:15 AM",
+		"02:30 AM",
+		"02:45 AM",
+		"03:00 AM",
+		"03:15 AM",
+		"03:30 AM",
+		"03:45 AM",
+		"04:00 AM",
+		"04:15 AM",
+		"04:30 AM",
+		"04:45 AM",
+		"05:00 AM",
+		"05:15 AM",
+		"05:30 AM",
+		"05:45 AM",
+		"06:00 AM",
+		"06:15 AM",
+		"06:30 AM",
+		"06:45 AM",
+		"07:00 AM",
+		"07:15 AM",
+		"07:30 AM",
+		"07:45 AM",
+		"08:00 AM",
+		"08:15 AM",
+		"08:30 AM",
+		"08:45 AM",
+		"09:00 AM",
+		"09:15 AM",
+		"09:30 AM",
+		"09:45 AM",
+		"10:00 AM",
+		"10:15 AM",
+		"10:30 AM",
+		"10:45 AM",
+		"11:00 AM",
+		"11:15 AM",
+		"11:30 AM",
+		"11:45 AM",
+		"12:00 PM",
+		"12:15 PM",
+		"12:30 PM",
+		"12:45 PM",
+		"01:00 PM",
+		"01:15 PM",
+		"01:30 PM",
+		"01:45 PM",
+		"02:00 PM",
+		"02:15 PM",
+		"02:30 PM",
+		"02:45 PM",
+		"03:00 PM",
+		"03:15 PM",
+		"03:30 PM",
+		"03:45 PM",
+		"04:00 PM",
+		"04:15 PM",
+		"04:30 PM",
+		"04:45 PM",
+		"05:00 PM",
+		"05:15 PM",
+		"05:30 PM",
+		"05:45 PM",
+		"06:00 PM",
+		"06:15 PM",
+		"06:30 PM",
+		"06:45 PM",
+		"07:00 PM",
+		"07:15 PM",
+		"07:30 PM",
+		"07:45 PM",
+		"08:00 PM",
+		"08:15 PM",
+		"08:30 PM",
+		"08:45 PM",
+		"09:00 PM",
+		"09:15 PM",
+		"09:30 PM",
+		"09:45 PM",
+		"10:00 PM",
+		"10:15 PM",
+		"10:30 PM",
+		"10:45 PM",
+		"11:00 PM",
+	]
+
 	const [docs, setDocs] = useState([])
 	const [trigger, setTrigger] = useState(false)
 	//const [updateIndex, setUpdateIndex] = useState(false)
@@ -18,6 +118,7 @@ const TablesForm = () => {
 	const [numberOfElements, setNumberOfElements] = useState(0)
 	const [signInIndex, setSignInIndex] = useState(0)
 	const [signOutIndex, setSignOutIndex] = useState(0)
+	const [activeTimeArray, setActiveTimeArray] = useState(defaultTime)
 
 	const [allData, setAllData] = useState([
 		{
@@ -28,206 +129,6 @@ const TablesForm = () => {
 			hoursWorked: "",
 		},
 	])
-
-	let timeIn = [
-		"11:00 PM",
-		"11:15 PM",
-		"11:30 PM",
-		"11:45 PM",
-		"12:00 AM",
-		"12:15 AM",
-		"12:30 AM",
-		"12:45 AM",
-		"01:00 AM",
-		"01:15 AM",
-		"01:30 AM",
-		"01:45 AM",
-		"02:00 AM",
-		"02:15 AM",
-		"02:30 AM",
-		"02:45 AM",
-		"03:00 AM",
-		"03:15 AM",
-		"03:30 AM",
-		"03:45 AM",
-		"04:00 AM",
-		"04:15 AM",
-		"04:30 AM",
-		"04:45 AM",
-		"05:00 AM",
-		"05:15 AM",
-		"05:30 AM",
-		"05:45 AM",
-		"06:00 AM",
-		"06:15 AM",
-		"06:30 AM",
-		"06:45 AM",
-		"07:00 AM",
-		"07:15 AM",
-		"07:30 AM",
-		"07:45 AM",
-		"08:00 AM",
-		"08:15 AM",
-		"08:30 AM",
-		"08:45 AM",
-		"09:00 AM",
-		"09:15 AM",
-		"09:30 AM",
-		"09:45 AM",
-		"10:00 AM",
-		"10:15 AM",
-		"10:30 AM",
-		"10:45 AM",
-		"11:00 AM",
-		"11:15 AM",
-		"11:30 AM",
-		"11:45 AM",
-		"12:00 PM",
-		"12:15 PM",
-		"12:30 PM",
-		"12:45 PM",
-		"01:00 PM",
-		"01:15 PM",
-		"01:30 PM",
-		"01:45 PM",
-		"02:00 PM",
-		"02:15 PM",
-		"02:30 PM",
-		"02:45 PM",
-		"03:00 PM",
-		"03:15 PM",
-		"03:30 PM",
-		"03:45 PM",
-		"04:00 PM",
-		"04:15 PM",
-		"04:30 PM",
-		"04:45 PM",
-		"05:00 PM",
-		"05:15 PM",
-		"05:30 PM",
-		"05:45 PM",
-		"06:00 PM",
-		"06:15 PM",
-		"06:30 PM",
-		"06:45 PM",
-		"07:00 PM",
-		"07:15 PM",
-		"07:30 PM",
-		"07:45 PM",
-		"08:00 PM",
-		"08:15 PM",
-		"08:30 PM",
-		"08:45 PM",
-		"09:00 PM",
-		"09:15 PM",
-		"09:30 PM",
-		"09:45 PM",
-		"10:00 PM",
-		"10:15 PM",
-		"10:30 PM",
-		"10:45 PM",
-		"11:00 PM",
-	]
-
-	let timeOut = [
-		"11:00 PM",
-		"11:15 PM",
-		"11:30 PM",
-		"11:45 PM",
-		"12:00 AM",
-		"12:15 AM",
-		"12:30 AM",
-		"12:45 AM",
-		"01:00 AM",
-		"01:15 AM",
-		"01:30 AM",
-		"01:45 AM",
-		"02:00 AM",
-		"02:15 AM",
-		"02:30 AM",
-		"02:45 AM",
-		"03:00 AM",
-		"03:15 AM",
-		"03:30 AM",
-		"03:45 AM",
-		"04:00 AM",
-		"04:15 AM",
-		"04:30 AM",
-		"04:45 AM",
-		"05:00 AM",
-		"05:15 AM",
-		"05:30 AM",
-		"05:45 AM",
-		"06:00 AM",
-		"06:15 AM",
-		"06:30 AM",
-		"06:45 AM",
-		"07:00 AM",
-		"07:15 AM",
-		"07:30 AM",
-		"07:45 AM",
-		"08:00 AM",
-		"08:15 AM",
-		"08:30 AM",
-		"08:45 AM",
-		"09:00 AM",
-		"09:15 AM",
-		"09:30 AM",
-		"09:45 AM",
-		"10:00 AM",
-		"10:15 AM",
-		"10:30 AM",
-		"10:45 AM",
-		"11:00 AM",
-		"11:15 AM",
-		"11:30 AM",
-		"11:45 AM",
-		"12:00 PM",
-		"12:15 PM",
-		"12:30 PM",
-		"12:45 PM",
-		"01:00 PM",
-		"01:15 PM",
-		"01:30 PM",
-		"01:45 PM",
-		"02:00 PM",
-		"02:15 PM",
-		"02:30 PM",
-		"02:45 PM",
-		"03:00 PM",
-		"03:15 PM",
-		"03:30 PM",
-		"03:45 PM",
-		"04:00 PM",
-		"04:15 PM",
-		"04:30 PM",
-		"04:45 PM",
-		"05:00 PM",
-		"05:15 PM",
-		"05:30 PM",
-		"05:45 PM",
-		"06:00 PM",
-		"06:15 PM",
-		"06:30 PM",
-		"06:45 PM",
-		"07:00 PM",
-		"07:15 PM",
-		"07:30 PM",
-		"07:45 PM",
-		"08:00 PM",
-		"08:15 PM",
-		"08:30 PM",
-		"08:45 PM",
-		"09:00 PM",
-		"09:15 PM",
-		"09:30 PM",
-		"09:45 PM",
-		"10:00 PM",
-		"10:15 PM",
-		"10:30 PM",
-		"10:45 PM",
-		"11:00 PM",
-	]
 
 	const handleAddRow = i => {
 		const list = [...allData]
@@ -407,7 +308,7 @@ const TablesForm = () => {
 	}, [trigger])
 
 	//update firebase with new timeslots for the selected date and site.
-	function handleFirebaseIndex(date, sitename) {
+	const handleFirebaseIndex = async (date, sitename) => {
 		if (signOutIndex - signInIndex <= 0) {
 			alert(
 				`Please make sure your sign out time is after your sign in time. ${
@@ -415,9 +316,9 @@ const TablesForm = () => {
 				}`
 			)
 		} else {
-			var arrayTop = timeIn.slice(0, signInIndex - 1)
+			var arrayTop = activeTimeArray.slice(0, signInIndex - 1)
 			console.log("array top " + arrayTop)
-			var arrayBottom = timeIn.slice(signOutIndex - 2, timeIn.length)
+			var arrayBottom = activeTimeArray.slice(signOutIndex - 2, activeTimeArray.length)
 			console.log("array bottom " + arrayBottom)
 			var newFireBaseArray = [...arrayTop, "---", ...arrayBottom]
 			console.log("firebase Array" + newFireBaseArray)
@@ -434,6 +335,28 @@ const TablesForm = () => {
 						firebaseArray: newFireBaseArray,
 					})
 			}, 1000)
+			setTimeout(() => {
+				fetchFirebaseIndex(date, sitename)
+			}, 2000)
+		}
+	}
+
+	//if date and sitename present on firebase, fetch the data and populate new select field.
+	const fetchFirebaseIndex = async (date, sitename) => {
+		const collectionRef = firebase
+			.firestore()
+			.collection("timeframeIndex")
+			.doc(`${date}`)
+			.collection(`${sitename}`)
+			.doc("UsedUpSlots")
+		const doc = await collectionRef.get()
+		if (!doc.exists) {
+			console.log("no such document")
+			setActiveTimeArray(defaultTime)
+		} else {
+			console.log("found it!")
+			console.log(doc.data().firebaseArray)
+			setActiveTimeArray(doc.data().firebaseArray)
 		}
 	}
 
@@ -542,7 +465,7 @@ const TablesForm = () => {
 							>
 								<option>---Sign In</option>
 								<option></option>
-								{timeIn.map((time, index) => {
+								{activeTimeArray.map((time, index) => {
 									return (
 										<option id='timeInOption' key={index}>
 											{time}
@@ -561,7 +484,7 @@ const TablesForm = () => {
 							>
 								<option>---Sign Out</option>
 								<option></option>
-								{timeOut.map(time => {
+								{activeTimeArray.map(time => {
 									return (
 										<option
 										//key={time.id}

@@ -13,6 +13,12 @@ const TablesForm = () => {
 
 	const [docs, setDocs] = useState([])
 	const [trigger, setTrigger] = useState(false)
+	//const [updateIndex, setUpdateIndex] = useState(false)
+	const [dataMessage, setDataMessage] = useState("")
+	const [numberOfElements, setNumberOfElements] = useState(0)
+	const [signInIndex, setSignInIndex] = useState(0)
+	const [signOutIndex, setSignOutIndex] = useState(0)
+
 	const [allData, setAllData] = useState([
 		{
 			date: "",
@@ -22,10 +28,6 @@ const TablesForm = () => {
 			hoursWorked: "",
 		},
 	])
-	const [dataMessage, setDataMessage] = useState("")
-	const [numberOfElements, setNumberOfElements] = useState(0)
-	const [signInIndex, setSignInIndex] = useState(0)
-	const [signOutIndex, setSignOutIndex] = useState(0)
 
 	let timeIn = [
 		"11:00 PM",
@@ -265,6 +267,29 @@ const TablesForm = () => {
 				document.getElementById(`signOut-${i}`).disabled = true
 			} else {
 				document.getElementById(`sitename-${i}`).disabled = false
+				// document.getElementById(`signIn-${i}`).disabled = false
+				// document.getElementById(`signOut-${i}`).disabled = false
+			}
+		}
+
+		if (name === "sitename") {
+			let d = document.getElementById(`date-${i}`).value
+			let sn = document.getElementById(`sitename-${i}`).value
+			if (e.target.value === "---Select your site") {
+				document.getElementById(`signIn-${i}`).disabled = true
+				document.getElementById(`signOut-${i}`).disabled = true
+			} else {
+				// firebase
+				// 	.firestore()
+				// 	.collection("timeframeIndex")
+				// 	.doc(`${d}`)
+				// 	.collection(`${sn}`)
+				// 	.doc("UsedUpSlots")
+				// 	.set({
+				// 		//get array information from above declared time slots
+				// 		timeIn: timeIn,
+				// 		timeOut: timeOut,
+				// 	})
 				document.getElementById(`signIn-${i}`).disabled = false
 				document.getElementById(`signOut-${i}`).disabled = false
 			}
@@ -273,34 +298,15 @@ const TablesForm = () => {
 		if (name === "signIn") {
 			//Get the index number of selcted sign in option
 			var selectBox = document.getElementById(`signIn-${i}`)
-			var selectValueIndex = selectBox.options[selectBox.selectedIndex].index
-			setSignInIndex(selectValueIndex)
-			//alert(selectValueIndex)
+			setSignInIndex(selectBox.options[selectBox.selectedIndex].index)
+			console.log(signInIndex)
 		}
 
 		if (name === "signOut") {
 			//Get the index number of selcted sign out option
-			var selectBox = document.getElementById(`signOut-${i}`)
-			var selectValueIndex = selectBox.options[selectBox.selectedIndex].index
-			setSignOutIndex(selectValueIndex)
-			//alert(selectValueIndex)
-		}
-
-		if (name === "sitename") {
-			let d = document.getElementById(`date-${i}`).value
-			let sn = document.getElementById(`sitename-${i}`).value
-			if (d !== "---Select the date") {
-				firebase
-					.firestore()
-					.collection("timeframeIndex")
-					.doc(`${d}`)
-					.collection(`${sn}`)
-					.doc("UsedUpSlots")
-					.set({
-						timeIn: timeIn,
-						timeOut: timeOut,
-					})
-			}
+			var selectSignOutBox = document.getElementById(`signOut-${i}`)
+			setSignOutIndex(selectSignOutBox.options[selectSignOutBox.selectedIndex].index)
+			console.log(signOutIndex)
 		}
 	}
 
@@ -388,6 +394,36 @@ const TablesForm = () => {
 
 		return () => fetchData()
 	}, [trigger])
+
+	function handleFirebaseIndex() {
+		if (signOutIndex - signInIndex <= 0) {
+			alert(
+				`Please make sure your sign out time is after your sign in time. ${
+					signOutIndex - signInIndex
+				}`
+			)
+		} else {
+			var arrayTop = timeIn.slice(0, signInIndex - 1)
+			console.log("array top " + arrayTop)
+			var arrayBottom = timeIn.slice(signOutIndex - 2, timeIn.length)
+			console.log("array bottom " + arrayBottom)
+			var newFireBaseArray = [...arrayTop, "---", ...arrayBottom]
+			console.log("firebase Array" + newFireBaseArray)
+
+			// 	firebase
+			// 			.firestore()
+			// 			.collection("timeframeIndex")
+			// 			.doc(`${d}`)
+			// 			.collection(`${sn}`)
+			// 			.doc("UsedUpSlots")
+			// 			.set({
+			// 				//get array information from above declared time slots
+			// 				timeIn: timeIn,
+			// 				timeOut: timeOut,
+			// 			})
+			// }
+		}
+	}
 
 	async function handleSubmit(e) {
 		e.preventDefault()
@@ -588,6 +624,16 @@ const TablesForm = () => {
 			<br />
 			<br />
 			Time Out Index: {signOutIndex}
+			<br />
+			<br />
+			<button
+				onClick={() => {
+					handleFirebaseIndex()
+				}}
+				className='ml-3'
+			>
+				Check State <br />
+			</button>
 		</>
 	)
 }

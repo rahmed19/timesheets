@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext, useRef } from "react"
 import { useHistory } from "react-router-dom"
 import { getDaysInMonth, getDate, getMonth, getYear, add, format } from "date-fns"
 import FirebaseContext from "../context/firebase"
@@ -119,6 +119,8 @@ const TablesForm = () => {
 	const [signInIndex, setSignInIndex] = useState(0)
 	const [signOutIndex, setSignOutIndex] = useState(0)
 	const [activeTimeArray, setActiveTimeArray] = useState(defaultTime)
+	const [selectedOption, setSelectedOption] = useState("")
+	const [rowIndex, setRowIndex] = useState(0)
 
 	const [allData, setAllData] = useState([
 		{
@@ -131,6 +133,7 @@ const TablesForm = () => {
 	])
 
 	const handleAddRow = i => {
+		setRowIndex(i)
 		const list = [...allData]
 		list.splice(i + 1, 0, {
 			date: "",
@@ -183,22 +186,11 @@ const TablesForm = () => {
 				document.getElementById(`signIn-${i}`).disabled = true
 				document.getElementById(`signOut-${i}`).disabled = true
 			} else {
-				// firebase
-				// 	.firestore()
-				// 	.collection("timeframeIndex")
-				// 	.doc(`${d}`)
-				// 	.collection(`${sn}`)
-				// 	.doc("UsedUpSlots")
-				// 	.set({
-				// 		//get array information from above declared time slots
-				// 		timeIn: timeIn,
-				// 		timeOut: timeOut,
-				// 	})
 				document.getElementById(`signIn-${i}`).disabled = false
 				document.getElementById(`signOut-${i}`).disabled = false
 				setTimeout(() => {
 					fetchFirebaseIndex(d, sn)
-				}, 2000)
+				}, 500)
 			}
 		}
 
@@ -360,6 +352,10 @@ const TablesForm = () => {
 		}
 	}
 
+	const handleSignInSignOut = () => {
+		console.log("Handle Sign in Sign Out")
+	}
+
 	async function handleSubmit(e) {
 		e.preventDefault()
 		let allDatesArray = []
@@ -455,12 +451,13 @@ const TablesForm = () => {
 										})}
 								</select>
 							)}
-							<select
+							{/* <select
 								id={`signIn-${i}`}
 								name='signIn'
 								onChange={e => handleInputChange(e, i)}
 								className='border bg-gray-300 ml-3'
 								disabled='true'
+
 								//className='font-semibold shadow md:appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-500'
 							>
 								<option>---Sign In</option>
@@ -493,26 +490,30 @@ const TablesForm = () => {
 										</option>
 									)
 								})}
-							</select>
+							</select> */}
 
-							{/* <input
-								id={`signIn-${i}`}
+							<input
 								type='text'
+								id={`signIn-${i}`}
 								name='signIn'
 								placeholder=''
-								value={data.signIn}
+								//value={selectedOption}
 								className='border bg-gray-300 ml-3'
-								onChange={e => handleInputChange(e, i)}
+								//onChange={e => handleInputChange(e, i)}
+								onClick={() => handleSignInSignOut()}
 							/>
+
 							<input
-								id={`signOut-${i}`}
 								type='text'
+								id={`signOut-${i}`}
 								name='signOut'
 								placeholder=''
-								value={data.signOut}
+								////value={data.hoursWorked}
 								className='border bg-gray-300 ml-3'
-								onChange={e => handleInputChange(e, i)}
-							/> */}
+								//onChange={e => handleInputChange(e, i)}
+								onClick={() => handleSignInSignOut()}
+							/>
+
 							<input
 								id={`hoursWorked-${i}`}
 								type='text'
@@ -570,6 +571,32 @@ const TablesForm = () => {
 			>
 				Check State <br />
 			</button>
+			<br />
+			{activeTimeArray.map((time, index) => {
+				return (
+					<>
+						<form>
+							<label>
+								<input
+									name='signIn'
+									type='radio'
+									id={index}
+									key={index}
+									value={time}
+									onClick={() => {
+										setSelectedOption(time)
+										setTimeout(() => {
+											console.log(selectedOption)
+										}, 1000)
+									}}
+									checked={selectedOption === time}
+								/>
+								{time}
+							</label>
+						</form>
+					</>
+				)
+			})}
 		</>
 	)
 }

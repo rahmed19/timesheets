@@ -121,6 +121,7 @@ const TablesForm = () => {
 	const [activeTimeArray, setActiveTimeArray] = useState(defaultTime)
 	const [selectedOption, setSelectedOption] = useState("")
 	const [rowIndex, setRowIndex] = useState(0)
+	const [showComponentDisplayDates, setShowComponentDisplayDates] = useState(false)
 
 	const [allData, setAllData] = useState([
 		{
@@ -531,6 +532,8 @@ const TablesForm = () => {
 								className='border bg-gray-300 ml-3'
 								//onChange={e => handleInputChange(e, i)}
 								onClick={() => handleSignInSignOut()}
+								onMouseEnter={() => setShowComponentDisplayDates(true)}
+								onMouseOut={() => setShowComponentDisplayDates(false)}
 							/>
 
 							<input
@@ -542,6 +545,8 @@ const TablesForm = () => {
 								className='border bg-gray-300 ml-3'
 								//onChange={e => handleInputChange(e, i)}
 								onClick={() => handleSignInSignOut()}
+								onMouseEnter={() => setShowComponentDisplayDates(true)}
+								onMouseOut={() => setShowComponentDisplayDates(false)}
 							/>
 
 							<input
@@ -605,7 +610,7 @@ const TablesForm = () => {
 				Check State <br />
 			</button>
 			<br />
-			<ComponentDisplayDates />
+			{showComponentDisplayDates ? <ComponentDisplayDates /> : null}
 		</>
 	)
 }

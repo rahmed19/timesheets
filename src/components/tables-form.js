@@ -587,6 +587,7 @@ const TablesForm = () => {
 										setSelectedOption(time)
 										setTimeout(() => {
 											console.log(selectedOption)
+											document.getElementById(`signIn-${rowIndex}`).value = selectedOption
 										}, 1000)
 									}}
 									checked={selectedOption === time}

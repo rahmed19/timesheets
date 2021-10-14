@@ -132,8 +132,38 @@ const TablesForm = () => {
 		},
 	])
 
+	function ComponentDisplayDates() {
+		var listOfDate = activeTimeArray.map((time, index) => {
+			return (
+				<>
+					<form>
+						<label>
+							<input
+								name='signIn'
+								type='radio'
+								id={index}
+								key={index}
+								value={time}
+								onClick={() => {
+									setSelectedOption(time)
+									setTimeout(() => {
+										console.log(selectedOption)
+										document.getElementById(`signIn-${rowIndex}`).value = time
+									}, 1000)
+								}}
+								checked={selectedOption === time}
+							/>
+							{time}
+						</label>
+					</form>
+				</>
+			)
+		})
+		return listOfDate
+	}
+
 	const handleAddRow = i => {
-		setRowIndex(i)
+		setRowIndex(p => p + 1)
 		const list = [...allData]
 		list.splice(i + 1, 0, {
 			date: "",
@@ -562,6 +592,9 @@ const TablesForm = () => {
 			Time Out Index: {signOutIndex}
 			<br />
 			<br />
+			Rowbase Index: {rowIndex}
+			<br />
+			<br />
 			<button
 				id='handleFirebaseIndex'
 				onClick={() => {
@@ -572,32 +605,7 @@ const TablesForm = () => {
 				Check State <br />
 			</button>
 			<br />
-			{activeTimeArray.map((time, index) => {
-				return (
-					<>
-						<form>
-							<label>
-								<input
-									name='signIn'
-									type='radio'
-									id={index}
-									key={index}
-									value={time}
-									onClick={() => {
-										setSelectedOption(time)
-										setTimeout(() => {
-											console.log(selectedOption)
-											document.getElementById(`signIn-${rowIndex}`).value = selectedOption
-										}, 1000)
-									}}
-									checked={selectedOption === time}
-								/>
-								{time}
-							</label>
-						</form>
-					</>
-				)
-			})}
+			<ComponentDisplayDates />
 		</>
 	)
 }

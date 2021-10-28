@@ -153,6 +153,7 @@ const TablesForm = () => {
 											console.log(selectedOption)
 											document.getElementById(`signIn-${rowIndex}`).value = time
 											setShowComponentDisplayDates(false)
+											setSelectedOption(null)
 										}, 300)
 									}}
 									checked={selectedOption === time}
@@ -182,6 +183,7 @@ const TablesForm = () => {
 											console.log(selectedOption)
 											document.getElementById(`signOut-${rowIndex}`).value = time
 											setShowComponentDisplayDates(false)
+											setSelectedOption(null)
 										}, 300)
 									}}
 									checked={selectedOption === time}

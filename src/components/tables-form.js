@@ -122,6 +122,7 @@ const TablesForm = () => {
 	const [selectedOption, setSelectedOption] = useState("")
 	const [rowIndex, setRowIndex] = useState(0)
 	const [showComponentDisplayDates, setShowComponentDisplayDates] = useState(false)
+	const [signInOrOut, setSignInOrOut] = useState("")
 
 	const [allData, setAllData] = useState([
 		{
@@ -133,33 +134,65 @@ const TablesForm = () => {
 		},
 	])
 
-	function ComponentDisplayDates() {
-		var listOfDate = activeTimeArray.map((time, index) => {
-			return (
-				<>
-					<form>
-						<label>
-							<input
-								name='signIn'
-								type='radio'
-								id={index}
-								key={index}
-								value={time}
-								onClick={() => {
-									setSelectedOption(time)
-									setTimeout(() => {
-										console.log(selectedOption)
-										document.getElementById(`signIn-${rowIndex}`).value = time
-									}, 1000)
-								}}
-								checked={selectedOption === time}
-							/>
-							{time}
-						</label>
-					</form>
-				</>
-			)
-		})
+	function ComponentDisplayDates({ signInOrOut }) {
+		if (signInOrOut === "signIn") {
+			var listOfDate = activeTimeArray.map((time, index) => {
+				return (
+					<>
+						<form>
+							<label>
+								<input
+									name='signIn'
+									type='radio'
+									id={index}
+									key={index}
+									value={time}
+									onClick={() => {
+										setSelectedOption(time)
+										setTimeout(() => {
+											console.log(selectedOption)
+											document.getElementById(`signIn-${rowIndex}`).value = time
+											setShowComponentDisplayDates(false)
+										}, 300)
+									}}
+									checked={selectedOption === time}
+								/>
+								{time}
+							</label>
+						</form>
+					</>
+				)
+			})
+		}
+		if (signInOrOut === "signOut") {
+			var listOfDate = activeTimeArray.map((time, index) => {
+				return (
+					<>
+						<form>
+							<label>
+								<input
+									name='signIn'
+									type='radio'
+									id={index}
+									key={index}
+									value={time}
+									onClick={() => {
+										setSelectedOption(time)
+										setTimeout(() => {
+											console.log(selectedOption)
+											document.getElementById(`signOut-${rowIndex}`).value = time
+											setShowComponentDisplayDates(false)
+										}, 300)
+									}}
+									checked={selectedOption === time}
+								/>
+								{time}
+							</label>
+						</form>
+					</>
+				)
+			})
+		}
 		return listOfDate
 	}
 
@@ -532,8 +565,11 @@ const TablesForm = () => {
 								className='border bg-gray-300 ml-3'
 								//onChange={e => handleInputChange(e, i)}
 								onClick={() => handleSignInSignOut()}
-								onMouseEnter={() => setShowComponentDisplayDates(true)}
-								onMouseOut={() => setShowComponentDisplayDates(false)}
+								onMouseEnter={() => {
+									setSignInOrOut("signIn")
+									setShowComponentDisplayDates(true)
+								}}
+								//onMouseOut={() => setShowComponentDisplayDates(false)}
 							/>
 
 							<input
@@ -545,8 +581,11 @@ const TablesForm = () => {
 								className='border bg-gray-300 ml-3'
 								//onChange={e => handleInputChange(e, i)}
 								onClick={() => handleSignInSignOut()}
-								onMouseEnter={() => setShowComponentDisplayDates(true)}
-								onMouseOut={() => setShowComponentDisplayDates(false)}
+								onMouseEnter={() => {
+									setSignInOrOut("signOut")
+									setShowComponentDisplayDates(true)
+								}}
+								//onMouseOut={() => setShowComponentDisplayDates(false)}
 							/>
 
 							<input
@@ -610,7 +649,9 @@ const TablesForm = () => {
 				Check State <br />
 			</button>
 			<br />
-			{showComponentDisplayDates ? <ComponentDisplayDates /> : null}
+			{showComponentDisplayDates ? (
+				<ComponentDisplayDates signInOrOut={signInOrOut} />
+			) : null}
 		</>
 	)
 }

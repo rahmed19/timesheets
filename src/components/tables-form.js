@@ -412,7 +412,7 @@ const TablesForm = () => {
 			console.log("no such document")
 			setActiveTimeArray(defaultTime)
 		} else {
-			console.log("found it!")
+			console.log("found it!!")
 			console.log(doc.data().firebaseArray)
 			setActiveTimeArray(doc.data().firebaseArray)
 		}
